@@ -29,7 +29,7 @@ public class TestMain {
         Item apple = new Item("apple", 18.50);
         User first = new User("Bogdan", "b.chupilka@gmail.com");
         List<Item> emptyList = new ArrayList<>();
-        Order orderFirst = new Order(first, emptyList);
+        Order orderFirst = new Order(first.getId(), emptyList);
         itemService.create(apple);
         System.out.println(Storage.items);
         itemDao.update(apple);

@@ -50,7 +50,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order completeOrder(List<Item> items, User user) {
-        Order newOrder = new Order(user, items);
+        Order newOrder = new Order(user.getId(), items);
         orderDao.create(newOrder);
         return newOrder;
     }
@@ -59,7 +59,7 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> getUserOrders(User user) {
         List<Order> userOrders = new ArrayList<>();
         for (Order o : orderDao.getAll()) {
-            if (o.getUser().getId().equals(user.getId())) {
+            if (o.getUserId().equals(user.getId())) {
                 userOrders.add(o);
             }
         }

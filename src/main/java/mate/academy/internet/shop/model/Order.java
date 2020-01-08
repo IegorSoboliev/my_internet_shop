@@ -4,12 +4,12 @@ import java.util.List;
 
 public class Order {
     private Long id;
-    private User user;
+    private Long userId;
     private List<Item> items;
     private Double totalPrice;
 
-    public Order(User user, List<Item> items) {
-        this.user = user;
+    public Order(Long userId, List<Item> items) {
+        this.userId = userId;
         this.items = items;
     }
 
@@ -21,12 +21,12 @@ public class Order {
         this.id = orderCounter;
     }
 
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Double getTotalPrice() {
@@ -41,7 +41,7 @@ public class Order {
     public String toString() {
         return "Order{"
                 + "id=" + id
-                + ", user=" + user
+                + ", userId=" + userId
                 + ", items=" + items
                 + ", totalPrice=" + totalPrice
                 + '}';
