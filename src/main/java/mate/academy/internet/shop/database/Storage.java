@@ -1,12 +1,12 @@
 package mate.academy.internet.shop.database;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import mate.academy.internet.shop.model.Bucket;
 import mate.academy.internet.shop.model.Item;
 import mate.academy.internet.shop.model.Order;
 import mate.academy.internet.shop.model.User;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Storage {
     public static final List<Item> items = new ArrayList();

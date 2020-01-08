@@ -1,5 +1,8 @@
 package mate.academy.internet.shop.lib;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import mate.academy.internet.shop.dao.BucketDao;
 import mate.academy.internet.shop.dao.ItemDao;
 import mate.academy.internet.shop.dao.OrderDao;
@@ -10,13 +13,10 @@ import mate.academy.internet.shop.service.ItemService;
 import mate.academy.internet.shop.service.OrderService;
 import mate.academy.internet.shop.service.UserService;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class AnnotatedClassMap {
     private static final Map<Class, Object> classMap = new HashMap<>();
-    
-    static  {
+
+    static {
         classMap.put(UserDao.class, Factory.getInstanceUserDao());
         classMap.put(BucketDao.class, Factory.getInstanceBucketDao());
         classMap.put(ItemDao.class, Factory.getInstanceItemDao());

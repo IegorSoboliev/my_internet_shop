@@ -1,10 +1,9 @@
 package mate.academy.internet.shop.service;
 
+import java.util.List;
+
 import mate.academy.internet.shop.model.Bucket;
 import mate.academy.internet.shop.model.Item;
-
-import java.util.List;
-import java.util.Optional;
 
 public interface BucketService {
 

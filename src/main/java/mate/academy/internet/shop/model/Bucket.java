@@ -37,10 +37,10 @@ public class Bucket {
 
     @Override
     public String toString() {
-        return "Bucket{" +
-                "id=" + id +
-                ", user=" + user +
-                ", selectedItems=" + selectedItems +
-                '}';
+        return "Bucket{"
+                + "id=" + id
+                + ", user=" + user
+                + ", selectedItems=" + selectedItems
+                + '}';
     }
 }

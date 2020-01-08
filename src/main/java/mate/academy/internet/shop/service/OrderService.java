@@ -1,12 +1,10 @@
 package mate.academy.internet.shop.service;
 
-import mate.academy.internet.shop.model.Bucket;
+import java.util.List;
+
 import mate.academy.internet.shop.model.Item;
 import mate.academy.internet.shop.model.Order;
 import mate.academy.internet.shop.model.User;
-
-import java.util.List;
-import java.util.Optional;
 
 public interface OrderService {
 

@@ -1,20 +1,15 @@
 package mate.academy.internet.shop.lib;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import mate.academy.internet.shop.dao.ItemDao;
-import mate.academy.internet.shop.dao.impl.BucketDaoImpl;
 import mate.academy.internet.shop.database.Storage;
-import mate.academy.internet.shop.lib.Inject;
 import mate.academy.internet.shop.model.Bucket;
 import mate.academy.internet.shop.model.Item;
 import mate.academy.internet.shop.model.Order;
 import mate.academy.internet.shop.model.User;
-import mate.academy.internet.shop.service.BucketService;
 import mate.academy.internet.shop.service.ItemService;
-import mate.academy.internet.shop.service.OrderService;
-import mate.academy.internet.shop.service.UserService;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class TestMain {
     @Inject
@@ -39,6 +34,7 @@ public class TestMain {
         Order orderFirst = new Order(first, emptyList);
         itemService.create(apple);
         System.out.println(Storage.items);
-
+        itemDao.update(apple);
+        System.out.println(Storage.orders);
     }
 }

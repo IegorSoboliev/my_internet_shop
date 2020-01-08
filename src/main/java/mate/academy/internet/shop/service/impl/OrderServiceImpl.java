@@ -1,5 +1,9 @@
 package mate.academy.internet.shop.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
+
 import mate.academy.internet.shop.dao.OrderDao;
 import mate.academy.internet.shop.lib.Inject;
 import mate.academy.internet.shop.lib.Service;
@@ -7,10 +11,6 @@ import mate.academy.internet.shop.model.Item;
 import mate.academy.internet.shop.model.Order;
 import mate.academy.internet.shop.model.User;
 import mate.academy.internet.shop.service.OrderService;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
 
 @Service
 public class OrderServiceImpl implements OrderService {

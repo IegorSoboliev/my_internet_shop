@@ -1,12 +1,11 @@
 package mate.academy.internet.shop.dao.impl;
 
+import java.util.List;
+import java.util.Optional;
+
 import mate.academy.internet.shop.database.Storage;
 import mate.academy.internet.shop.lib.Dao;
 import mate.academy.internet.shop.model.User;
-
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Dao
 public class UserDaoImpl implements mate.academy.internet.shop.dao.UserDao {
@@ -24,7 +23,7 @@ public class UserDaoImpl implements mate.academy.internet.shop.dao.UserDao {
     public User update(User user) {
         for (User u : Storage.users) {
             if (u.getId().equals(user.getId())
-                    &&u.getEmail().equals(user.getEmail())) {
+                    && u.getEmail().equals(user.getEmail())) {
                 u.setName(user.getName());
             }
         }

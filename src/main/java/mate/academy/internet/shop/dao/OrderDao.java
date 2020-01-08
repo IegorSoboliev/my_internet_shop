@@ -1,10 +1,9 @@
 package mate.academy.internet.shop.dao;
 
-import mate.academy.internet.shop.model.Order;
-import mate.academy.internet.shop.model.User;
-
 import java.util.List;
 import java.util.Optional;
+
+import mate.academy.internet.shop.model.Order;
 
 public interface OrderDao {
 
@@ -19,4 +18,4 @@ public interface OrderDao {
     boolean delete(Order order);
 
     boolean deleteById(Long id);
- }
+}

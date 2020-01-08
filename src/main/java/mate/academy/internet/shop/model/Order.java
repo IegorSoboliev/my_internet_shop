@@ -49,12 +49,12 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", user=" + user +
-                ", items=" + items +
-                ", bucket=" + bucket +
-                ", totalPrice=" + totalPrice +
-                '}';
+        return "Order{"
+                + "id=" + id
+                + ", user=" + user
+                + ", items=" + items
+                + ", bucket=" + bucket
+                + ", totalPrice=" + totalPrice
+                + '}';
     }
 }

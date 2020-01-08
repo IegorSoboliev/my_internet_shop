@@ -1,11 +1,5 @@
 package mate.academy.internet.shop.lib;
 
-import mate.academy.internet.shop.dao.UserDao;
-import mate.academy.internet.shop.lib.AnnotatedClassMap;
-import mate.academy.internet.shop.lib.Dao;
-import mate.academy.internet.shop.lib.Inject;
-import mate.academy.internet.shop.lib.Service;
-
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -14,9 +8,8 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
-/**
- * Students will implement this on Lesson 16 (Servlet)
- */
+import mate.academy.internet.shop.dao.UserDao;
+
 public class Injector {
     private static final String PROJECT_MAIN_PACKAGE = "mate.academy.internet.shop";
     private static List<Class> classes = new ArrayList<>();
@@ -39,7 +32,8 @@ public class Injector {
                 if (field.getDeclaredAnnotation(Inject.class) != null) {
                     Object implementation = AnnotatedClassMap.getImplementation(field.getType());
                     if (implementation.getClass().getDeclaredAnnotation(Service.class) != null
-                            || implementation.getClass().getDeclaredAnnotation(Dao.class) != null) {
+                            || implementation.getClass()
+                            .getDeclaredAnnotation(Dao.class) != null) {
                         field.setAccessible(true);
                         field.set(null, implementation);
                     }
@@ -49,12 +43,13 @@ public class Injector {
     }
 
     /**
-     * Scans all classes accessible from the context class loader which belong to the given package and subpackages.
+     * Scans all classes accessible from the context class loader which belong
+     * to the given package and subpackages.
      *
      * @param packageName The base package
      * @return The classes
      * @throws ClassNotFoundException if the class cannot be located
-     * @throws IOException if I/O errors occur
+     * @throws IOException            if I/O errors occur
      */
     private static List<Class> getClasses(String packageName)
             throws IOException, ClassNotFoundException {

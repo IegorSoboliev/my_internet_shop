@@ -1,18 +1,15 @@
 package mate.academy.internet.shop.dao.impl;
 
+import java.util.Optional;
+
 import mate.academy.internet.shop.dao.BucketDao;
 import mate.academy.internet.shop.database.Storage;
 import mate.academy.internet.shop.lib.Dao;
 import mate.academy.internet.shop.model.Bucket;
-import mate.academy.internet.shop.model.Item;
-
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Dao
 public class BucketDaoImpl implements BucketDao {
-    private static Long bucketCounter = 1l;
+    private static Long bucketCounter = 1L;
 
     @Override
     public Bucket create(Bucket bucket) {
@@ -29,7 +26,7 @@ public class BucketDaoImpl implements BucketDao {
                 b.setSelectedItems(bucket.getSelectedItems());
             }
         }
-            return bucket;
+        return bucket;
     }
 
     @Override

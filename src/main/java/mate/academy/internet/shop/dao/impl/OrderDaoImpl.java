@@ -1,17 +1,15 @@
 package mate.academy.internet.shop.dao.impl;
 
+import java.util.List;
+import java.util.Optional;
+
 import mate.academy.internet.shop.database.Storage;
 import mate.academy.internet.shop.lib.Dao;
 import mate.academy.internet.shop.model.Order;
-import mate.academy.internet.shop.model.User;
-
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Dao
 public class OrderDaoImpl implements mate.academy.internet.shop.dao.OrderDao {
-    private static Long orderCounter = 1l;
+    private static Long orderCounter = 1L;
 
     @Override
     public Order create(Order order) {

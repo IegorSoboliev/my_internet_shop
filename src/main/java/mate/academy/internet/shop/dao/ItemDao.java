@@ -1,9 +1,9 @@
 package mate.academy.internet.shop.dao;
 
-import mate.academy.internet.shop.model.Item;
-
 import java.util.List;
 import java.util.Optional;
+
+import mate.academy.internet.shop.model.Item;
 
 public interface ItemDao {
 
