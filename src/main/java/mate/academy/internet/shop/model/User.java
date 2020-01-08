@@ -1,7 +1,7 @@
 package mate.academy.internet.shop.model;
 
 public class User {
-    private Long id;
+    private java.lang.Long id;
     private String name;
     private String email;
 
@@ -10,11 +10,11 @@ public class User {
         this.email = email;
     }
 
-    public Long getId() {
+    public java.lang.Long getId() {
         return id;
     }
 
-    public void setId(Long userCounter) {
+    public void setId(java.lang.Long userCounter) {
         this.id = userCounter;
     }
 

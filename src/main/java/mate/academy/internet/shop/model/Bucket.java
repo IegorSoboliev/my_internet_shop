@@ -4,43 +4,43 @@ import java.util.List;
 
 public class Bucket {
     private Long id;
-    private User user;
-    private List<Item> selectedItems;
+    private Long userId;
+    private List<Item> items;
 
-    public Bucket(User user) {
-        this.user = user;
+    public Bucket(Long userId) {
+        this.userId = userId;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long bucketCounter) {
-        this.id = bucketCounter;
+    public void setId(Long idGenerator) {
+        this.id = idGenerator;
     }
 
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public List<Item> getSelectedItems() {
-        return selectedItems;
+    public List<Item> getItems() {
+        return items;
     }
 
-    public void setSelectedItems(List<Item> selectedItems) {
-        this.selectedItems = selectedItems;
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 
     @Override
     public String toString() {
         return "Bucket{"
                 + "id=" + id
-                + ", user=" + user
-                + ", selectedItems=" + selectedItems
+                + ", userId=" + userId
+                + ", items=" + items
                 + '}';
     }
 }

@@ -28,7 +28,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order get(Long id) {
+    public Order get(java.lang.Long id) {
         return orderDao.get(id)
                 .orElseThrow(() -> new NoSuchElementException("Found no order with id " + id));
     }
@@ -44,7 +44,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean deleteById(Long id) {
+    public boolean deleteById(java.lang.Long id) {
         return orderDao.deleteById(id);
     }
 

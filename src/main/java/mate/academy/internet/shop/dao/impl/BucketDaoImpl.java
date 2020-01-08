@@ -9,24 +9,29 @@ import mate.academy.internet.shop.model.Bucket;
 
 @Dao
 public class BucketDaoImpl implements BucketDao {
-    private static Long bucketCounter = 1L;
+    private static Long idGenerator = 1L;
 
     @Override
     public Bucket create(Bucket bucket) {
-        bucket.setId(bucketCounter);
+        bucket.setId(idGenerator);
         Storage.buckets.add(bucket);
-        bucketCounter++;
+        idGenerator++;
         return bucket;
     }
 
     @Override
     public Bucket update(Bucket bucket) {
-        for (Bucket b : Storage.buckets) {
+        Storage.buckets
+                .stream()
+                .filter(b -> b.getId().equals(bucket.getId()))
+                .findFirst()
+                .ifPresent(b -> b.setItems(bucket.getItems()));
+        return bucket;
+        /*for (Bucket b : Storage.buckets) {
             if (b.getId().equals(bucket.getId())) {
                 b.setSelectedItems(bucket.getSelectedItems());
-            }
-        }
-        return bucket;
+                }
+             }*/
     }
 
     @Override
@@ -44,12 +49,6 @@ public class BucketDaoImpl implements BucketDao {
 
     @Override
     public boolean deleteById(Long id) {
-        for (Bucket b : Storage.buckets) {
-            if (b.getId().equals(id)) {
-                Storage.buckets.remove(b);
-                return true;
-            }
-        }
-        return false;
+        return Storage.buckets.removeIf(b -> b.getId().equals(id));
     }
 }

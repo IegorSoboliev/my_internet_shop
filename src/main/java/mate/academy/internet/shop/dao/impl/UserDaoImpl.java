@@ -3,19 +3,20 @@ package mate.academy.internet.shop.dao.impl;
 import java.util.List;
 import java.util.Optional;
 
+import mate.academy.internet.shop.dao.UserDao;
 import mate.academy.internet.shop.database.Storage;
 import mate.academy.internet.shop.lib.Dao;
 import mate.academy.internet.shop.model.User;
 
 @Dao
-public class UserDaoImpl implements mate.academy.internet.shop.dao.UserDao {
-    private static Long userCount = 1L;
+public class UserDaoImpl implements UserDao {
+    private static java.lang.Long idGenerator = 1L;
 
     @Override
     public User create(User user) {
-        user.setId(userCount);
+        user.setId(idGenerator);
         Storage.users.add(user);
-        userCount++;
+        idGenerator++;
         return user;
     }
 
@@ -31,7 +32,7 @@ public class UserDaoImpl implements mate.academy.internet.shop.dao.UserDao {
     }
 
     @Override
-    public Optional<User> get(Long id) {
+    public Optional<User> get(java.lang.Long id) {
         return Storage.users
                 .stream()
                 .filter(user -> user.getId().equals(id))
@@ -49,7 +50,7 @@ public class UserDaoImpl implements mate.academy.internet.shop.dao.UserDao {
     }
 
     @Override
-    public boolean deleteById(Long id) {
+    public boolean deleteById(java.lang.Long id) {
         for (User u : Storage.users) {
             if (u.getId().equals(id)) {
                 Storage.users.remove(u);

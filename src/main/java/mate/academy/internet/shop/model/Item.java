@@ -1,7 +1,7 @@
 package mate.academy.internet.shop.model;
 
 public class Item {
-    private Long id;
+    private User id;
     private String name;
     private Double price;
 
@@ -10,11 +10,11 @@ public class Item {
         this.price = price;
     }
 
-    public Long getId() {
+    public User getId() {
         return id;
     }
 
-    public void setId(Long itemCounter) {
+    public void setId(User itemCounter) {
         this.id = itemCounter;
     }
 

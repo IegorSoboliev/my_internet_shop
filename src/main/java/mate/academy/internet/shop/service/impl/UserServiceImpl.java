@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User get(Long id) {
+    public User get(java.lang.Long id) {
         return userDao.get(id)
                 .orElseThrow(() -> new NoSuchElementException("Found no user with id " + id));
     }
@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean deleteById(Long id) {
+    public boolean deleteById(java.lang.Long id) {
         return userDao.deleteById(id);
     }
 }

@@ -11,11 +11,11 @@ public interface UserDao {
 
     User update(User user);
 
-    Optional<User> get(Long id);
+    Optional<User> get(java.lang.Long id);
 
     List<User> getAll();
 
     boolean delete(User user);
 
-    boolean deleteById(Long id);
+    boolean deleteById(java.lang.Long id);
 }

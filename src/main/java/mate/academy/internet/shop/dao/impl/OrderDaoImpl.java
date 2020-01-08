@@ -3,19 +3,20 @@ package mate.academy.internet.shop.dao.impl;
 import java.util.List;
 import java.util.Optional;
 
+import mate.academy.internet.shop.dao.OrderDao;
 import mate.academy.internet.shop.database.Storage;
 import mate.academy.internet.shop.lib.Dao;
 import mate.academy.internet.shop.model.Order;
 
 @Dao
-public class OrderDaoImpl implements mate.academy.internet.shop.dao.OrderDao {
-    private static Long orderCounter = 1L;
+public class OrderDaoImpl implements OrderDao {
+    private static Long idGenerator = 1L;
 
     @Override
     public Order create(Order order) {
-        order.setId(orderCounter);
+        order.setId(idGenerator);
         Storage.orders.add(order);
-        orderCounter++;
+        idGenerator++;
         return order;
     }
 
@@ -23,7 +24,7 @@ public class OrderDaoImpl implements mate.academy.internet.shop.dao.OrderDao {
     public Order update(Order order) {
         for (Order o : Storage.orders) {
             if (o.getId().equals(order.getId())) {
-                o.setBucket(order.getBucket());
+                o.setTotalPrice(order.getTotalPrice());
             }
         }
         return order;

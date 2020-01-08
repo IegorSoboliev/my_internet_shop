@@ -10,11 +10,11 @@ public interface UserService {
 
     User update(User user);
 
-    User get(Long id);
+    User get(java.lang.Long id);
 
     List<User> getAll();
 
     boolean delete(User user);
 
-    boolean deleteById(Long id);
+    boolean deleteById(java.lang.Long id);
 }

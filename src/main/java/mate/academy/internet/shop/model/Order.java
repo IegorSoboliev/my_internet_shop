@@ -3,23 +3,21 @@ package mate.academy.internet.shop.model;
 import java.util.List;
 
 public class Order {
-    private Long id;
+    private java.lang.Long id;
     private User user;
     private List<Item> items;
-    private Bucket bucket;
     private Double totalPrice;
 
     public Order(User user, List<Item> items) {
         this.user = user;
-        items = bucket.getSelectedItems();
         this.items = items;
     }
 
-    public Long getId() {
+    public java.lang.Long getId() {
         return id;
     }
 
-    public void setId(Long orderCounter) {
+    public void setId(java.lang.Long orderCounter) {
         this.id = orderCounter;
     }
 
@@ -29,14 +27,6 @@ public class Order {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Bucket getBucket() {
-        return bucket;
-    }
-
-    public void setBucket(Bucket bucket) {
-        this.bucket = bucket;
     }
 
     public Double getTotalPrice() {
@@ -53,7 +43,6 @@ public class Order {
                 + "id=" + id
                 + ", user=" + user
                 + ", items=" + items
-                + ", bucket=" + bucket
                 + ", totalPrice=" + totalPrice
                 + '}';
     }
