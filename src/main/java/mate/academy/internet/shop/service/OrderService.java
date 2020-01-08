@@ -12,13 +12,13 @@ public interface OrderService {
 
     Order update(Order order);
 
-    Order get(java.lang.Long id);
+    Order get(Long id);
 
     List<Order> getAll();
 
     boolean delete(Order order);
 
-    boolean deleteById(java.lang.Long id);
+    boolean deleteById(Long id);
 
     Order completeOrder(List<Item> items, User user);
 

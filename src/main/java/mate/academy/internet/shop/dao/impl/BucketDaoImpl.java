@@ -27,11 +27,6 @@ public class BucketDaoImpl implements BucketDao {
                 .findFirst()
                 .ifPresent(b -> b.setItems(bucket.getItems()));
         return bucket;
-        /*for (Bucket b : Storage.buckets) {
-            if (b.getId().equals(bucket.getId())) {
-                b.setSelectedItems(bucket.getSelectedItems());
-                }
-             }*/
     }
 
     @Override

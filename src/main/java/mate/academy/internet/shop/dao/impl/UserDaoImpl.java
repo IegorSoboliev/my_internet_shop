@@ -22,12 +22,11 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User update(User user) {
-        for (User u : Storage.users) {
-            if (u.getId().equals(user.getId())
-                    && u.getEmail().equals(user.getEmail())) {
-                u.setName(user.getName());
-            }
-        }
+        Storage.users
+                .stream()
+                .filter(u -> u.getId().equals(u.getId()))
+                .findFirst()
+                .ifPresent(u -> u.setName(u.getName()));
         return user;
     }
 
@@ -51,12 +50,6 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean deleteById(java.lang.Long id) {
-        for (User u : Storage.users) {
-            if (u.getId().equals(id)) {
-                Storage.users.remove(u);
-                return true;
-            }
-        }
-        return false;
+        return Storage.users.removeIf(u -> u.getId().equals(id));
     }
 }

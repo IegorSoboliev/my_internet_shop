@@ -22,12 +22,11 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public Item update(Item item) {
-        for (Item i : Storage.items) {
-            if (i.getId().equals(item.getId())) {
-                i.setName(i.getName());
-                i.setPrice(i.getPrice());
-            }
-        }
+        Storage.items
+                .stream()
+                .filter(i -> i.getId().equals(item.getId()))
+                .findFirst()
+                .ifPresent(i -> i.setPrice(item.getPrice()));
         return item;
     }
 
@@ -51,12 +50,6 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public boolean deleteById(Long id) {
-        for (Item i : Storage.items) {
-            if (i.getId().equals(id)) {
-                Storage.items.remove(i);
-                return true;
-            }
-        }
-        return false;
+        return Storage.items.removeIf(i -> i.getId().equals(id));
     }
 }

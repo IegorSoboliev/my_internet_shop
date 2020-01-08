@@ -5,7 +5,6 @@ import java.util.List;
 
 import mate.academy.internet.shop.dao.ItemDao;
 import mate.academy.internet.shop.database.Storage;
-import mate.academy.internet.shop.model.Bucket;
 import mate.academy.internet.shop.model.Item;
 import mate.academy.internet.shop.model.Order;
 import mate.academy.internet.shop.model.User;
@@ -29,7 +28,6 @@ public class TestMain {
 
         Item apple = new Item("apple", 18.50);
         User first = new User("Bogdan", "b.chupilka@gmail.com");
-        Bucket bucketFirst = new Bucket(first);
         List<Item> emptyList = new ArrayList<>();
         Order orderFirst = new Order(first, emptyList);
         itemService.create(apple);

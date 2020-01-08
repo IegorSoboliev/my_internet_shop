@@ -22,11 +22,11 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public Order update(Order order) {
-        for (Order o : Storage.orders) {
-            if (o.getId().equals(order.getId())) {
-                o.setTotalPrice(order.getTotalPrice());
-            }
-        }
+        Storage.orders
+                .stream()
+                .filter(o -> o.getId().equals(order.getId()))
+                .findFirst()
+                .ifPresent(o -> o.setTotalPrice(order.getTotalPrice()));
         return order;
     }
 
@@ -50,12 +50,6 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public boolean deleteById(Long id) {
-        for (Order o : Storage.orders) {
-            if (o.getId().equals(id)) {
-                Storage.orders.remove(o);
-                return true;
-            }
-        }
-        return false;
+        return Storage.orders.removeIf(o -> o.getId().equals(id));
     }
 }

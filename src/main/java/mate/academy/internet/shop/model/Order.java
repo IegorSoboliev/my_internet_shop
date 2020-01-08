@@ -3,7 +3,7 @@ package mate.academy.internet.shop.model;
 import java.util.List;
 
 public class Order {
-    private java.lang.Long id;
+    private Long id;
     private User user;
     private List<Item> items;
     private Double totalPrice;
@@ -13,11 +13,11 @@ public class Order {
         this.items = items;
     }
 
-    public java.lang.Long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(java.lang.Long orderCounter) {
+    public void setId(Long orderCounter) {
         this.id = orderCounter;
     }
 
