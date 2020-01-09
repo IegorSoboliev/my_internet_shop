@@ -13,7 +13,7 @@ import mate.academy.internet.shop.model.User;
 import mate.academy.internet.shop.service.OrderService;
 
 @Service
-public class OrderServiceImpl implements OrderService {
+public class  OrderServiceImpl implements OrderService {
     @Inject
     public static OrderDao orderDao;
 
