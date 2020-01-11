@@ -1,17 +1,13 @@
 package mate.academy.internet.shop.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
     private Long id;
     private Long userId;
-    private List<Item> items;
+    private List<Item> items = new ArrayList<>();
     private Double totalPrice;
-
-    public Order(Long userId, List<Item> items) {
-        this.userId = userId;
-        this.items = items;
-    }
 
     public Long getId() {
         return id;
@@ -27,6 +23,14 @@ public class Order {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
+    public List<Item> getItems() {
+        return items;
     }
 
     public Double getTotalPrice() {

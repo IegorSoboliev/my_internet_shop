@@ -1,15 +1,12 @@
 package mate.academy.internet.shop.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Bucket {
     private Long id;
     private Long userId;
-    private List<Item> items;
-
-    public Bucket(Long userId) {
-        this.userId = userId;
-    }
+    private List<Item> items = new ArrayList<>();
 
     public Long getId() {
         return id;
