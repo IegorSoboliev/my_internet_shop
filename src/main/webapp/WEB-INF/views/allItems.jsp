@@ -32,7 +32,7 @@ Hello, ${greeting}! There are excellent goods in this shop!
                 <c:out value="${item.price}" />
             </td>
             <td>
-                <a href="/my_internet_shop_war_exploded/servlet/addItemToBucket?item_Id=${item.id}">ADD</a>
+                <a href="${pageContext.request.contextPath}/servlet/addItemToBucket?item_Id=${item.id}">ADD</a>
             </td>
         </tr>
     </c:forEach>

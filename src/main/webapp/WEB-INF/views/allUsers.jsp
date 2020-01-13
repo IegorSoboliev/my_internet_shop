@@ -35,13 +35,13 @@ Hello, ${greeting}! This is all users page
                 <c:out value="${user.email}" />
             </td>
             <td>
-                <a href="/my_internet_shop_war_exploded/servlet/deleteUser?user_id=${user.id}">DELETE</a>
+                <a href="${pageContext.request.contextPath}/servlet/deleteUser?user_id=${user.id}">DELETE</a>
             </td>
         </tr>
     </c:forEach>
 </table>
 <p><a href="${pageContext.request.contextPath}/servlet/index">Main Page</a></p>
-<p><a href="${pageContext.request.contextPath}/servlet/bucket ">Your bucket</a></p>
+<p><a href="${pageContext.request.contextPath}/servlet/bucket">Your bucket</a></p>
 <p><a href="${pageContext.request.contextPath}/servlet/getAllItems">All items</a></p>
 
 </body>

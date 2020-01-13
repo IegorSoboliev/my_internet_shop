@@ -4,8 +4,8 @@
     <title>Registration</title>
 </head>
 <body>
-Please, sign in
-<form action="/my_internet_shop_war_exploded/servlet/registration" method="post">
+Please, register or sign in
+<form action="${pageContext.request.contextPath}/servlet/registration" method="post">
     <div class="container">
         <h1>Register</h1>
         <p>Please fill in this form to create an account.</p>

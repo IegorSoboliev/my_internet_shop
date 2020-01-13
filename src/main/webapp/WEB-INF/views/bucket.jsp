@@ -31,12 +31,12 @@ This is your bucket, ${greeting}. Nice choice:)))!
                 <c:out value="${item.price}" />
             </td>
             <td>
-                <a href="/my_internet_shop_war_exploded/servlet/removeItemFromBucket?bucket_id=${bucket.id}&item_id=${item.id}">REMOVE</a>
+                <a href="${pageContext.request.contextPath}/servlet/removeItemFromBucket?bucket_id=${bucket.id}&item_id=${item.id}">REMOVE</a>
             </td>
         </tr>
     </c:forEach>
 </table>
-<p><a href="/my_internet_shop_war_exploded/servlet/completeOrder">COMPLETE ORDER</a></p>
+<p><a href="${pageContext.request.contextPath}/servlet/completeOrder">COMPLETE ORDER</a></p>
 
 <p><a href="${pageContext.request.contextPath}/servlet/getAllItems">All items</a></p>
 
