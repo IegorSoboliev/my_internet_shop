@@ -1,5 +1,5 @@
-#Sun Jan 12 00:00:32 EET 2020
-/Users/marichka/IdeaProjects/my_internet_shop/src/main/java/mate/academy/internet/shop/model/Item.java=1578736752257
+#Mon Jan 13 11:41:08 EET 2020
+/Users/marichka/IdeaProjects/my_internet_shop/src/main/java/mate/academy/internet/shop/model/Item.java=1578907432360
 /Users/marichka/IdeaProjects/my_internet_shop/src/main/java/mate/academy/internet/shop/lib/Injector.java=1578500786372
 /Users/marichka/IdeaProjects/my_internet_shop/src/main/java/mate/academy/internet/shop/service/BucketService.java=1578779995731
 /Users/marichka/IdeaProjects/my_internet_shop/src/main/java/mate/academy/internet/shop/model/Order.java=1578776140295
@@ -7,7 +7,7 @@
 /Users/marichka/IdeaProjects/my_internet_shop/src/main/java/mate/academy/internet/shop/lib/Service.java=1578500786372
 /Users/marichka/IdeaProjects/my_internet_shop/src/main/java/mate/academy/internet/shop/service/impl/OrderServiceImpl.java=1578758668098
 /Users/marichka/IdeaProjects/my_internet_shop/src/main/java/mate/academy/internet/shop/model/Bucket.java=1578752820291
-/Users/marichka/IdeaProjects/my_internet_shop/src/main/java/mate/academy/internet/shop/controller/GetAllItemsController.java=1578779697245
+/Users/marichka/IdeaProjects/my_internet_shop/src/main/java/mate/academy/internet/shop/controller/GetAllItemsController.java=1578907497957
 /Users/marichka/IdeaProjects/my_internet_shop/src/main/java/mate/academy/internet/shop/controller/AddItemToBucketController.java=1578779396593
 /Users/marichka/IdeaProjects/my_internet_shop/src/main/java/mate/academy/internet/shop/dao/impl/OrderDaoImpl.java=1578500786369
 /Users/marichka/IdeaProjects/my_internet_shop/src/main/java/mate/academy/internet/shop/dao/ItemDao.java=1578500786365
@@ -31,6 +31,7 @@ configuration*?=FE7EC1C5148614EE459B07AC88290FFB0FDC8375
 /Users/marichka/IdeaProjects/my_internet_shop/src/main/java/mate/academy/internet/shop/lib/Inject.java=1578500786371
 /Users/marichka/IdeaProjects/my_internet_shop/src/main/java/mate/academy/internet/shop/controller/BucketController.java=1578779524327
 /Users/marichka/IdeaProjects/my_internet_shop/src/main/java/mate/academy/internet/shop/controller/DeleteUserController.java=1578779697240
+/Users/marichka/IdeaProjects/my_internet_shop/src/main/java/mate/academy/internet/shop/controller/AddItemController.java=1578907432394
 /Users/marichka/IdeaProjects/my_internet_shop/src/main/java/mate/academy/internet/shop/service/impl/ItemServiceImpl.java=1578690615305
 /Users/marichka/IdeaProjects/my_internet_shop/src/main/java/mate/academy/internet/shop/dao/impl/UserDaoImpl.java=1578736408355
 /Users/marichka/IdeaProjects/my_internet_shop/src/main/java/mate/academy/internet/shop/service/impl/BucketServiceImpl.java=1578756632250

@@ -14,15 +14,6 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>getAllUsers</servlet-name>
-        <servlet-class>mate.academy.internet.shop.controller.GetAllUsersController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>getAllUsers</servlet-name>
-        <url-pattern>/servlet/getAllUsers</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
         <servlet-name>registration</servlet-name>
         <servlet-class>mate.academy.internet.shop.controller.RegistrationController</servlet-class>
     </servlet>
@@ -32,12 +23,30 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>getAllUsers</servlet-name>
+        <servlet-class>mate.academy.internet.shop.controller.GetAllUsersController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getAllUsers</servlet-name>
+        <url-pattern>/servlet/getAllUsers</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>deleteUser</servlet-name>
         <servlet-class>mate.academy.internet.shop.controller.DeleteUserController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>deleteUser</servlet-name>
         <url-pattern>/servlet/deleteUser</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>addItem</servlet-name>
+        <servlet-class>mate.academy.internet.shop.controller.AddItemController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addItem</servlet-name>
+        <url-pattern>/servlet/addItem</url-pattern>
     </servlet-mapping>
 
     <servlet>

@@ -41,5 +41,8 @@ Hello, ${greeting}! This is all users page
     </c:forEach>
 </table>
 <p><a href="${pageContext.request.contextPath}/servlet/index">Main Page</a></p>
+<p><a href="${pageContext.request.contextPath}/servlet/bucket ">Your bucket</a></p>
+<p><a href="${pageContext.request.contextPath}/servlet/getAllItems">All items</a></p>
+
 </body>
 </html>

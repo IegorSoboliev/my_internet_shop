@@ -37,6 +37,8 @@ Hello, ${greeting}! There are excellent goods in this shop!
         </tr>
     </c:forEach>
 </table>
+<p><a href="${pageContext.request.contextPath}/servlet/registration">Registration</a></p>
+<p><a href="${pageContext.request.contextPath}/servlet/bucket ">Your bucket</a></p>
 <p><a href="${pageContext.request.contextPath}/servlet/index">Main Page</a></p>
 </body>
 </html>

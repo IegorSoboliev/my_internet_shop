@@ -35,5 +35,6 @@ mate/academy/internet/shop/service/impl/OrderServiceImpl.class
 mate/academy/internet/shop/service/OrderService.class
 mate/academy/internet/shop/service/ItemService.class
 mate/academy/internet/shop/database/Storage.class
+mate/academy/internet/shop/controller/AddItemController.class
 mate/academy/internet/shop/service/impl/ItemServiceImpl.class
 mate/academy/internet/shop/service/UserService.class

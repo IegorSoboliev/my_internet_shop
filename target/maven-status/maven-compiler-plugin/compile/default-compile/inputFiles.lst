@@ -30,6 +30,7 @@
 /Users/marichka/IdeaProjects/my_internet_shop/src/main/java/mate/academy/internet/shop/model/User.java
 /Users/marichka/IdeaProjects/my_internet_shop/src/main/java/mate/academy/internet/shop/service/UserService.java
 /Users/marichka/IdeaProjects/my_internet_shop/src/main/java/mate/academy/internet/shop/service/impl/ItemServiceImpl.java
+/Users/marichka/IdeaProjects/my_internet_shop/src/main/java/mate/academy/internet/shop/controller/AddItemController.java
 /Users/marichka/IdeaProjects/my_internet_shop/src/main/java/mate/academy/internet/shop/service/impl/BucketServiceImpl.java
 /Users/marichka/IdeaProjects/my_internet_shop/src/main/java/mate/academy/internet/shop/dao/impl/UserDaoImpl.java
 /Users/marichka/IdeaProjects/my_internet_shop/src/main/java/mate/academy/internet/shop/lib/AnnotatedClassMap.java

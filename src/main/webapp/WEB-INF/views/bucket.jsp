@@ -37,5 +37,8 @@ This is your bucket, ${greeting}. Nice choice:)))!
     </c:forEach>
 </table>
 <p><a href="/my_internet_shop_war_exploded/servlet/completeOrder?bucket_id=${bucket.id}">COMPLETE ORDER</a></p>
+
+<p><a href="${pageContext.request.contextPath}/servlet/getAllItems">All items</a></p>
+
 </body>
 </html>
