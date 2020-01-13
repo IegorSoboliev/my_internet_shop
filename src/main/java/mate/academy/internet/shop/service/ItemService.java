@@ -12,7 +12,7 @@ public interface ItemService {
 
     Item get(Long id);
 
-    List<Item> getAllItems();
+    List<Item> getAll();
 
     boolean delete(Item item);
 

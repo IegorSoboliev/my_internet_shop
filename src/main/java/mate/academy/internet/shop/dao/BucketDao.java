@@ -1,5 +1,6 @@
 package mate.academy.internet.shop.dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import mate.academy.internet.shop.model.Bucket;
@@ -15,4 +16,6 @@ public interface BucketDao {
     boolean delete(Bucket bucket);
 
     boolean deleteById(Long id);
+
+    List<Bucket> getAll();
 }

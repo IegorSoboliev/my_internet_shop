@@ -13,6 +13,8 @@ public interface BucketService {
 
     Bucket get(Long id);
 
+    Bucket getByUserId(Long userId);
+
     boolean delete(Bucket bucket);
 
     boolean deleteById(Long id);
@@ -22,6 +24,8 @@ public interface BucketService {
     void deleteItem(Bucket bucket, Item item);
 
     void clear(Bucket bucket);
+
+    List<Bucket> getAll();
 
     List<Item> getAllItems(Bucket bucket);
 }
