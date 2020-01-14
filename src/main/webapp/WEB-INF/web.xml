@@ -95,12 +95,12 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>ordersController</servlet-name>
-        <servlet-class>mate.academy.internet.shop.controller.OrdersController</servlet-class>
+        <servlet-name>getUserOrdersController</servlet-name>
+        <servlet-class>mate.academy.internet.shop.controller.GetUserOrdersController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ordersController</servlet-name>
-        <url-pattern>/servlet/orders</url-pattern>
+        <servlet-name>getUserOrdersController</servlet-name>
+        <url-pattern>/servlet/getUserOrders</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -114,7 +114,7 @@
 
 
     <listener>
-        <listener-class>mate.academy.internet.shop.controller.InjectorInitializer</listener-class>
+        <listener-class>mate.academy.internet.shop.lib.InjectorInitializer</listener-class>
     </listener>
 
 </web-app>

@@ -2,3 +2,4 @@
 .idea/*
 target/*
 *.iml
+log4j-application.log
