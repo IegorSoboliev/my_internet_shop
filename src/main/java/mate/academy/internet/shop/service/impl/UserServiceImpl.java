@@ -3,6 +3,7 @@ package mate.academy.internet.shop.service.impl;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.UUID;
 
 import mate.academy.internet.shop.dao.UserDao;
 import mate.academy.internet.shop.exceptions.AuthenticationException;
@@ -18,7 +19,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(User user) {
+        user.setToken(generateToken());
         return userDao.create(user);
+    }
+
+    private String generateToken() {
+        return UUID.randomUUID().toString();
     }
 
     @Override

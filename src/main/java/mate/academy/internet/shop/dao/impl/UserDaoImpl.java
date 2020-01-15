@@ -2,7 +2,6 @@ package mate.academy.internet.shop.dao.impl;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import mate.academy.internet.shop.dao.UserDao;
 import mate.academy.internet.shop.database.Storage;
@@ -16,7 +15,6 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User create(User user) {
         user.setId(USER_ID);
-        user.setToken(UUID.randomUUID().toString());
         Storage.users.add(user);
         return user;
     }
