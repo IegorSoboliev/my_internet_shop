@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import mate.academy.internet.shop.lib.Inject;
 import mate.academy.internet.shop.model.User;
 import mate.academy.internet.shop.service.UserService;
+import org.apache.log4j.Logger;
 
 public class RegistrationController extends HttpServlet {
     @Inject
