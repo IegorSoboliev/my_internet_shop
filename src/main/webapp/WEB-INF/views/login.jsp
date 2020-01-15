@@ -11,11 +11,11 @@
     <title>Login</title>
 </head>
 <body>
-Please, sign in
+
 <div>${errorAuthentication}</div>
+
 <form action="${pageContext.request.contextPath}/login" method="post">
     <div class="container">
-        <h1>Register</h1>
         <p>Please, enter your email and password.</p>
         <hr>
         <label for="email"><b>Email</b></label>

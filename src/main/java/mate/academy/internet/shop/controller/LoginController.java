@@ -37,7 +37,7 @@ public class LoginController extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/servlet/index");
         } catch (AuthenticationException e) {
             LOGGER.error("Found no user during authentication");
-            req.setAttribute("errorAuthentication", "Incorrect email or password");
+            req.setAttribute("errorAuthentication", "SORRY! Incorrect email or password");
             req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
         }
     }
