@@ -2,6 +2,7 @@ package mate.academy.internet.shop.dao.impl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import mate.academy.internet.shop.dao.UserDao;
 import mate.academy.internet.shop.database.Storage;
@@ -15,6 +16,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User create(User user) {
         user.setId(USER_ID);
+        user.setToken(UUID.randomUUID().toString());
         Storage.users.add(user);
         return user;
     }
@@ -38,6 +40,14 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public Optional<User> getByToken(String token) {
+        return Storage.users
+                .stream()
+                .filter(u -> u.getToken().equals(token))
+                .findFirst();
+    }
+
+    @Override
     public List<User> getAll() {
         return Storage.users;
     }
@@ -50,5 +60,13 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean deleteById(java.lang.Long id) {
         return Storage.users.removeIf(u -> u.getId().equals(id));
+    }
+
+    @Override
+    public Optional<User> findByLogin(String email) {
+        return Storage.users
+                .stream()
+                .filter(u -> u.getEmail().equals(email))
+                .findFirst();
     }
 }

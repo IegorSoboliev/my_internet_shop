@@ -17,12 +17,12 @@ public class AddItemToBucketController extends HttpServlet {
     private static BucketService bucketService;
     @Inject
     private static ItemService itemService;
-    private static final Long USER_ID = 1L;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        Bucket bucket = bucketService.getByUserId(USER_ID);
+        Long userId = (Long) req.getSession(true).getAttribute("userId");
+        Bucket bucket = bucketService.getByUserId(userId);
         String itemId = req.getParameter("item_Id");
         Item item = itemService.get(Long.valueOf(itemId));
         bucketService.addItem(bucket, item);
