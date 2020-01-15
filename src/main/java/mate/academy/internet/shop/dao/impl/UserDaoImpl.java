@@ -10,12 +10,13 @@ import mate.academy.internet.shop.model.User;
 
 @Dao
 public class UserDaoImpl implements UserDao {
-    private static final Long USER_ID = 1L;
+    private static Long idGenerator = 1L;
 
     @Override
     public User create(User user) {
-        user.setId(USER_ID);
+        user.setId(idGenerator);
         Storage.users.add(user);
+        idGenerator++;
         return user;
     }
 
