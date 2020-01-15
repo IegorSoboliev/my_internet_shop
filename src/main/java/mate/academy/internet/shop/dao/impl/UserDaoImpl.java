@@ -38,6 +38,14 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public Optional<User> getByToken(String token) {
+        return Storage.users
+                .stream()
+                .filter(u -> u.getToken().equals(token))
+                .findFirst();
+    }
+
+    @Override
     public List<User> getAll() {
         return Storage.users;
     }
@@ -50,5 +58,13 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean deleteById(java.lang.Long id) {
         return Storage.users.removeIf(u -> u.getId().equals(id));
+    }
+
+    @Override
+    public Optional<User> findByLogin(String email) {
+        return Storage.users
+                .stream()
+                .filter(u -> u.getEmail().equals(email))
+                .findFirst();
     }
 }

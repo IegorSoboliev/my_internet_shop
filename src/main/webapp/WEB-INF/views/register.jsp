@@ -5,7 +5,7 @@
 </head>
 <body>
 Please, register or sign in
-<form action="${pageContext.request.contextPath}/servlet/registration" method="post">
+<form action="${pageContext.request.contextPath}/registration" method="post">
     <div class="container">
         <h1>Register</h1>
         <p>Please fill in this form to create an account.</p>
