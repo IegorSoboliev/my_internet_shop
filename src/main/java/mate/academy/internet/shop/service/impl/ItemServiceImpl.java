@@ -8,6 +8,7 @@ import mate.academy.internet.shop.lib.Inject;
 import mate.academy.internet.shop.lib.Service;
 import mate.academy.internet.shop.model.Item;
 import mate.academy.internet.shop.service.ItemService;
+import mate.academy.internet.shop.web.ItemIdGenerator;
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -16,6 +17,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Item create(Item item) {
+        item.setId(ItemIdGenerator.getIdGenerator());
         return itemDao.create(item);
     }
 

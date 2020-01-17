@@ -35,5 +35,6 @@ Please, register or sign in
         <p>Already have an account? <a href="#">Sign in</a>.</p>
     </div>
 </form>
+<p><a href="${pageContext.request.contextPath}/index">Main Page</a></p>
 </body>
 </html>

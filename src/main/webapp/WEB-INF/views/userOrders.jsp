@@ -46,7 +46,7 @@ These are your orders, ${greeting}. You are wise!
         </tr>
     </c:forEach>
 </table>
-<p><a href="${pageContext.request.contextPath}/servlet/index">Main Page</a></p>
-<p><a href="${pageContext.request.contextPath}/servlet/getAllItems">All items</a></p>
+<p><a href="${pageContext.request.contextPath}/index">Main Page</a></p>
+<p><a href="${pageContext.request.contextPath}/getAllItems">All items</a></p>
 </body>
 </html>

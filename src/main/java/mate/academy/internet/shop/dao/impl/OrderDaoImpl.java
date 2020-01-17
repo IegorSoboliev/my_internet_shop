@@ -10,13 +10,10 @@ import mate.academy.internet.shop.model.Order;
 
 @Dao
 public class OrderDaoImpl implements OrderDao {
-    private static Long idGenerator = 1L;
 
     @Override
     public Order create(Order order) {
-        order.setId(idGenerator);
         Storage.orders.add(order);
-        idGenerator++;
         return order;
     }
 

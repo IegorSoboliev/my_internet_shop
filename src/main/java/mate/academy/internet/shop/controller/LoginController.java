@@ -1,7 +1,9 @@
 package mate.academy.internet.shop.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,9 +16,9 @@ import mate.academy.internet.shop.service.UserService;
 import org.apache.log4j.Logger;
 
 public class LoginController extends HttpServlet {
+    private static final Logger LOGGER = Logger.getLogger(LoginController.class);
     @Inject
     private static UserService userService;
-    private static final Logger LOGGER = Logger.getLogger(LoginController.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -32,11 +34,12 @@ public class LoginController extends HttpServlet {
 
         try {
             User user = userService.login(email, password);
+            Cookie cookie = new Cookie("MATE", user.getToken());
+            resp.addCookie(cookie);
             HttpSession session = req.getSession(true);
             session.setAttribute("userId", user.getId());
-            resp.sendRedirect(req.getContextPath() + "/servlet/index");
+            resp.sendRedirect(req.getContextPath() + "/index");
         } catch (AuthenticationException e) {
-            LOGGER.error("Found no user during authentication");
             req.setAttribute("errorAuthentication", "SORRY! Incorrect email or password");
             req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
         }

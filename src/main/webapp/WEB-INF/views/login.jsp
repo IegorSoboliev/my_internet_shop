@@ -33,5 +33,6 @@
 
     </div>
 </form>
+<p><a href="${pageContext.request.contextPath}/index">Main Page</a></p>
 </body>
 </html>

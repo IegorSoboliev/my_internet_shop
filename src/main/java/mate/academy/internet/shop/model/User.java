@@ -1,35 +1,39 @@
 package mate.academy.internet.shop.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class User {
-    private java.lang.Long id;
+    private Long id;
     private String name;
     private String surname;
     private String email;
     private String password;
     private String token;
+    private Set<Role> roles = new HashSet<>();
 
-    public java.lang.Long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(java.lang.Long userCounter) {
-        this.id = userCounter;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setId(Long idGenerator) {
+        this.id = idGenerator;
     }
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getEmail() {
         return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getSurname() {
@@ -56,12 +60,26 @@ public class User {
         this.token = token;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public void addRole(Role role) {
+        roles.add(role);
+    }
+
     @Override
     public String toString() {
-        return "User{"
-                + "id=" + id
+        return "User{" + "id=" + id
                 + ", name='" + name + '\''
+                + ", surname='" + surname + '\''
                 + ", email='" + email + '\''
-                + '}';
+                + ", password='" + password + '\''
+                + ", token='" + token + '\''
+                + ", roles=" + roles + '}';
     }
 }

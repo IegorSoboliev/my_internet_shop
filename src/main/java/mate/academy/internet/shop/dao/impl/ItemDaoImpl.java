@@ -10,13 +10,10 @@ import mate.academy.internet.shop.model.Item;
 
 @Dao
 public class ItemDaoImpl implements ItemDao {
-    private static Long idGenerator = 1L;
 
     @Override
     public Item create(Item item) {
-        item.setId(idGenerator);
         Storage.items.add(item);
-        idGenerator++;
         return item;
     }
 

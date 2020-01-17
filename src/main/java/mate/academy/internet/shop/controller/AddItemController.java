@@ -1,6 +1,7 @@
 package mate.academy.internet.shop.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +29,6 @@ public class AddItemController extends HttpServlet {
         String price = req.getParameter("item_price");
         item.setPrice(Integer.valueOf(price));
         itemService.create(item);
-        resp.sendRedirect(req.getContextPath() + "/servlet/getAllItems");
+        resp.sendRedirect(req.getContextPath() + "/getAllItems");
     }
 }
