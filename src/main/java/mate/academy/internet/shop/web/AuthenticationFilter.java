@@ -23,8 +23,8 @@ public class AuthenticationFilter implements Filter {
             throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        Long userId = (Long) request.getSession().getAttribute("userId");
-        if (request.getCookies() == null || userId == null) {
+        if (request.getCookies() == null
+                || request.getSession().getAttribute("userId") == null) {
             processUnAuthenticated(request, response);
             return;
         }
