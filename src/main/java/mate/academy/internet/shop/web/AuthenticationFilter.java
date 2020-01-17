@@ -1,7 +1,13 @@
 package mate.academy.internet.shop.web;
 
 import java.io.IOException;
-import javax.servlet.*;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -28,12 +34,7 @@ public class AuthenticationFilter implements Filter {
             processUnAuthenticated(request, response);
             return;
         }
-        User user = userService.get(userId);
-        if (user != null) {
-            filterChain.doFilter(servletRequest, servletResponse);
-            return;
-        }
-        processUnAuthenticated(request, response);
+        filterChain.doFilter(servletRequest, servletResponse);
     }
 
     private void processUnAuthenticated(HttpServletRequest request, HttpServletResponse response)

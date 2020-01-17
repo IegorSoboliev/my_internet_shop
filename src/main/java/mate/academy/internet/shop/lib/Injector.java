@@ -12,8 +12,8 @@ import mate.academy.internet.shop.dao.UserDao;
 import org.apache.log4j.Logger;
 
 public class Injector {
-    private static final String PROJECT_MAIN_PACKAGE = "mate.academy.internet.shop";
     public static final Logger LOGGER = Logger.getLogger(Injector.class);
+    private static final String PROJECT_MAIN_PACKAGE = "mate.academy.internet.shop";
     private static List<Class> classes = new ArrayList<>();
 
     static {

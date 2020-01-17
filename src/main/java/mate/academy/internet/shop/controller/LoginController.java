@@ -1,8 +1,13 @@
 package mate.academy.internet.shop.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
-import javax.servlet.http.*;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import mate.academy.internet.shop.exceptions.AuthenticationException;
 import mate.academy.internet.shop.lib.Inject;
@@ -11,9 +16,9 @@ import mate.academy.internet.shop.service.UserService;
 import org.apache.log4j.Logger;
 
 public class LoginController extends HttpServlet {
+    private static final Logger LOGGER = Logger.getLogger(LoginController.class);
     @Inject
     private static UserService userService;
-    private static final Logger LOGGER = Logger.getLogger(LoginController.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)

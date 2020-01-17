@@ -6,7 +6,13 @@ import static mate.academy.internet.shop.model.Role.RoleName.USER;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import javax.servlet.*;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,7 +21,7 @@ import mate.academy.internet.shop.model.Role;
 import mate.academy.internet.shop.model.User;
 import mate.academy.internet.shop.service.UserService;
 
-public class AuthorisationFilter implements Filter {
+public class AuthorizationFilter implements Filter {
     @Inject
     private static UserService userService;
     private Map<String, Role.RoleName> onlyAdminUrls = new HashMap<>();
@@ -47,14 +53,14 @@ public class AuthorisationFilter implements Filter {
         Role.RoleName rolesAdmin = onlyAdminUrls.get(request.getServletPath());
         Role.RoleName rolesUser = onlyUserUrls.get(request.getServletPath());
         if (rolesAdmin == null && rolesUser == null) {
-            processAuthorised(filterChain, request, response);
+            processAuthorized(filterChain, request, response);
             return;
         }
 
         Long userId = (Long) request.getSession().getAttribute("userId");
         User user = userService.get(userId);
         if (verifyRole(user, rolesAdmin) || verifyRole(user, rolesUser)) {
-            processAuthorised(filterChain, request, response);
+            processAuthorized(filterChain, request, response);
             return;
         } else {
             processDenied(request, response);
@@ -66,7 +72,7 @@ public class AuthorisationFilter implements Filter {
         return user.getRoles().stream().anyMatch(role -> role.getRoleName().equals(roleName));
     }
 
-    private void processAuthorised(FilterChain filterChain,
+    private void processAuthorized(FilterChain filterChain,
                                    HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
         filterChain.doFilter(request, response);

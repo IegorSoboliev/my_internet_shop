@@ -149,11 +149,11 @@
     </filter-mapping>
 
     <filter>
-        <filter-name>authorisationFilter</filter-name>
-        <filter-class>mate.academy.internet.shop.web.AuthorisationFilter</filter-class>
+        <filter-name>authorizationFilter</filter-name>
+        <filter-class>mate.academy.internet.shop.web.AuthorizationFilter</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>authorisationFilter</filter-name>
+        <filter-name>authorizationFilter</filter-name>
         <url-pattern>/servlet/*</url-pattern>
     </filter-mapping>
 
