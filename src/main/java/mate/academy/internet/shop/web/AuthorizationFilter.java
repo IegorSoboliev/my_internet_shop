@@ -33,6 +33,7 @@ public class AuthorizationFilter implements Filter {
         onlyAdminUrls.put("/servlet/addItem", ADMIN);
         onlyAdminUrls.put("/servlet/deleteUser", ADMIN);
         onlyAdminUrls.put("/servlet/logout", ADMIN);
+
         onlyUserUrls.put("/servlet/deleteOrder", USER);
         onlyUserUrls.put("/servlet/getUserOrders", USER);
         onlyUserUrls.put("/servlet/completeOrder", USER);
@@ -40,7 +41,6 @@ public class AuthorizationFilter implements Filter {
         onlyUserUrls.put("/servlet/bucket", USER);
         onlyUserUrls.put("/servlet/addItemToBucket", USER);
         onlyUserUrls.put("/servlet/logout", USER);
-
     }
 
     @Override

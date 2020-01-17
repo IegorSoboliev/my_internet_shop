@@ -11,13 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import mate.academy.internet.shop.lib.Inject;
-import mate.academy.internet.shop.model.User;
-import mate.academy.internet.shop.service.UserService;
-
 public class AuthenticationFilter implements Filter {
-    @Inject
-    private static UserService userService;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
