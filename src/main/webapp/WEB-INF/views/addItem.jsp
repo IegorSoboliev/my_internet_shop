@@ -19,6 +19,6 @@
         <button type="submit" class="registerbtn">Add</button>
     </div>
 </form>
-<p><a href="${pageContext.request.contextPath}/servlet/index">Main Page</a></p>
+<p><a href="${pageContext.request.contextPath}/index">Main Page</a></p>
 </body>
 </html>

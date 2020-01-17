@@ -11,6 +11,7 @@ import mate.academy.internet.shop.model.Item;
 import mate.academy.internet.shop.model.Order;
 import mate.academy.internet.shop.model.User;
 import mate.academy.internet.shop.service.OrderService;
+import mate.academy.internet.shop.web.OrderIdGenerator;
 
 @Service
 public class  OrderServiceImpl implements OrderService {
@@ -19,6 +20,7 @@ public class  OrderServiceImpl implements OrderService {
 
     @Override
     public Order create(Order order) {
+        order.setId(OrderIdGenerator.getIdGenerator());
         return orderDao.create(order);
     }
 

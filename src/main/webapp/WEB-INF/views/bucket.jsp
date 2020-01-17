@@ -37,7 +37,7 @@ This is your bucket, ${greeting}. Nice choice:)))!
     </c:forEach>
 </table>
 <p><a href="${pageContext.request.contextPath}/servlet/completeOrder">COMPLETE ORDER</a></p>
-<p><a href="${pageContext.request.contextPath}/servlet/getAllItems">All items</a></p>
-<p><a href="${pageContext.request.contextPath}/servlet/index">Main Page</a></p>
+<p><a href="${pageContext.request.contextPath}/getAllItems">All items</a></p>
+<p><a href="${pageContext.request.contextPath}/index">Main Page</a></p>
 </body>
 </html>

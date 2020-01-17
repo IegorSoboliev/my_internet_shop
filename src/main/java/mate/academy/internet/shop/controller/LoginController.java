@@ -2,10 +2,7 @@ package mate.academy.internet.shop.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 
 import mate.academy.internet.shop.exceptions.AuthenticationException;
 import mate.academy.internet.shop.lib.Inject;
@@ -32,11 +29,12 @@ public class LoginController extends HttpServlet {
 
         try {
             User user = userService.login(email, password);
+            Cookie cookie = new Cookie("MATE", user.getToken());
+            resp.addCookie(cookie);
             HttpSession session = req.getSession(true);
             session.setAttribute("userId", user.getId());
-            resp.sendRedirect(req.getContextPath() + "/servlet/index");
+            resp.sendRedirect(req.getContextPath() + "/index");
         } catch (AuthenticationException e) {
-            LOGGER.error("Found no user during authentication");
             req.setAttribute("errorAuthentication", "SORRY! Incorrect email or password");
             req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
         }

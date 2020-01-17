@@ -9,6 +9,7 @@ import mate.academy.internet.shop.lib.Service;
 import mate.academy.internet.shop.model.Bucket;
 import mate.academy.internet.shop.model.Item;
 import mate.academy.internet.shop.service.BucketService;
+import mate.academy.internet.shop.web.BucketIdGenerator;
 
 @Service
 public class BucketServiceImpl implements BucketService {
@@ -17,6 +18,7 @@ public class BucketServiceImpl implements BucketService {
 
     @Override
     public Bucket create(Bucket bucket) {
+        bucket.setId(BucketIdGenerator.getIdGenerator());
         return bucketDao.create(bucket);
     }
 

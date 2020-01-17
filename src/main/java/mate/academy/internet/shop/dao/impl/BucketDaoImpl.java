@@ -10,13 +10,10 @@ import mate.academy.internet.shop.model.Bucket;
 
 @Dao
 public class BucketDaoImpl implements BucketDao {
-    private static Long idGenerator = 1L;
 
     @Override
     public Bucket create(Bucket bucket) {
-        bucket.setId(idGenerator);
         Storage.buckets.add(bucket);
-        idGenerator++;
         return bucket;
     }
 

@@ -11,6 +11,7 @@ import mate.academy.internet.shop.lib.Inject;
 import mate.academy.internet.shop.lib.Service;
 import mate.academy.internet.shop.model.User;
 import mate.academy.internet.shop.service.UserService;
+import mate.academy.internet.shop.web.UserIdGenerator;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -19,6 +20,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(User user) {
+        user.setId(UserIdGenerator.getIdGenerator());
         user.setToken(generateToken());
         return userDao.create(user);
     }
