@@ -14,7 +14,5 @@ public interface ItemService {
 
     List<Item> getAll();
 
-    boolean delete(Item item);
-
     boolean deleteById(Long id);
 }

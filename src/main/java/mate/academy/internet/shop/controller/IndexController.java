@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import mate.academy.internet.shop.lib.Injector;
 
 public class IndexController extends HttpServlet {
+
     static {
         try {
             Injector.injectDependency();

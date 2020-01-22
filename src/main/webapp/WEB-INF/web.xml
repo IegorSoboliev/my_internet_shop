@@ -124,6 +124,7 @@
     <servlet>
         <servlet-name>dataInjectionController</servlet-name>
         <servlet-class>mate.academy.internet.shop.controller.DataInjectionController</servlet-class>
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>dataInjectionController</servlet-name>

@@ -5,10 +5,8 @@ import java.util.Optional;
 
 import mate.academy.internet.shop.dao.ItemDao;
 import mate.academy.internet.shop.database.Storage;
-import mate.academy.internet.shop.lib.Dao;
 import mate.academy.internet.shop.model.Item;
 
-@Dao
 public class ItemDaoImpl implements ItemDao {
 
     @Override
@@ -38,11 +36,6 @@ public class ItemDaoImpl implements ItemDao {
     @Override
     public List<Item> getAll() {
         return Storage.items;
-    }
-
-    @Override
-    public boolean delete(Item item) {
-        return Storage.items.remove(item);
     }
 
     @Override
