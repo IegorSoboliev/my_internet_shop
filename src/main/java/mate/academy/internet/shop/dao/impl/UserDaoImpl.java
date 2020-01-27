@@ -3,21 +3,18 @@ package mate.academy.internet.shop.dao.impl;
 import java.util.List;
 import java.util.Optional;
 
-import mate.academy.internet.shop.dao.UserDao;
 import mate.academy.internet.shop.database.Storage;
 import mate.academy.internet.shop.lib.Dao;
 import mate.academy.internet.shop.model.User;
 
 @Dao
-public class UserDaoImpl implements UserDao {
+public class UserDaoImpl {
 
-    @Override
-    public User create(User user) {
+    public User add(User user) {
         Storage.users.add(user);
         return user;
     }
 
-    @Override
     public User update(User user) {
         Storage.users
                 .stream()
@@ -27,7 +24,6 @@ public class UserDaoImpl implements UserDao {
         return user;
     }
 
-    @Override
     public Optional<User> get(java.lang.Long id) {
         return Storage.users
                 .stream()
@@ -35,34 +31,18 @@ public class UserDaoImpl implements UserDao {
                 .findFirst();
     }
 
-    @Override
-    public Optional<User> getByToken(String token) {
-        return Storage.users
-                .stream()
-                .filter(u -> u.getToken().equals(token))
-                .findFirst();
-    }
-
-    @Override
     public List<User> getAll() {
         return Storage.users;
     }
 
-    @Override
-    public boolean delete(User user) {
-        return Storage.users.remove(user);
-    }
-
-    @Override
-    public boolean deleteById(java.lang.Long id) {
+    public boolean deleteById(Long id) {
         return Storage.users.removeIf(u -> u.getId().equals(id));
     }
 
-    @Override
-    public Optional<User> findByLogin(String email) {
+    public Optional<User> login(String email, String password) {
         return Storage.users
                 .stream()
-                .filter(u -> u.getEmail().equals(email))
+                .filter(u -> u.getEmail().equals(email) && u.getPassword().equals(password))
                 .findFirst();
     }
 }

@@ -1,7 +1,7 @@
 package mate.academy.internet.shop.web;
 
 public class BucketIdGenerator {
-    private static Long idGenerator = 1L;
+    private static Long idGenerator = 0L;
 
     public BucketIdGenerator() {
     }

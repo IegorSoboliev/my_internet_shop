@@ -3,13 +3,13 @@ package mate.academy.internet.shop.controller;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import mate.academy.internet.shop.exceptions.AuthenticationException;
+import mate.academy.internet.shop.exceptions.DataProcessingException;
 import mate.academy.internet.shop.lib.Inject;
 import mate.academy.internet.shop.model.User;
 import mate.academy.internet.shop.service.UserService;
@@ -31,11 +31,15 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         String email = req.getParameter("email");
         String password = req.getParameter("psw");
-
         try {
-            User user = userService.login(email, password);
-            Cookie cookie = new Cookie("MATE", user.getToken());
-            resp.addCookie(cookie);
+            User user = null;
+            try {
+                user = userService.login(email, password);
+            } catch (DataProcessingException e) {
+                LOGGER.error(e);
+                req.getRequestDispatcher("/WEB-INF/views/dataProcessingProblem.jsp")
+                        .forward(req, resp);
+            }
             HttpSession session = req.getSession(true);
             session.setAttribute("userId", user.getId());
             resp.sendRedirect(req.getContextPath() + "/index");

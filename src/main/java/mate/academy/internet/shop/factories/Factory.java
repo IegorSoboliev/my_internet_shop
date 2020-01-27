@@ -8,10 +8,10 @@ import mate.academy.internet.shop.dao.BucketDao;
 import mate.academy.internet.shop.dao.ItemDao;
 import mate.academy.internet.shop.dao.OrderDao;
 import mate.academy.internet.shop.dao.UserDao;
-import mate.academy.internet.shop.dao.impl.BucketDaoImpl;
-import mate.academy.internet.shop.dao.impl.OrderDaoImpl;
-import mate.academy.internet.shop.dao.impl.UserDaoImpl;
+import mate.academy.internet.shop.dao.jdbc.BucketDaoJdbcImpl;
 import mate.academy.internet.shop.dao.jdbc.ItemDaoJdbcImpl;
+import mate.academy.internet.shop.dao.jdbc.OrderDaoJdbcImpl;
+import mate.academy.internet.shop.dao.jdbc.UserDaoJdbcImpl;
 import mate.academy.internet.shop.service.BucketService;
 import mate.academy.internet.shop.service.ItemService;
 import mate.academy.internet.shop.service.OrderService;
@@ -34,7 +34,6 @@ public class Factory {
         } catch (ClassNotFoundException | SQLException e) {
             logger.error("Cannot establish a connection to DB", e);
         }
-
     }
 
     private static ItemDao instanceItemDao;
@@ -55,21 +54,21 @@ public class Factory {
 
     public static UserDao getInstanceUserDao() {
         if (instanceUserDao == null) {
-            instanceUserDao = new UserDaoImpl();
+            instanceUserDao = new UserDaoJdbcImpl(connection);
         }
         return instanceUserDao;
     }
 
     public static BucketDao getInstanceBucketDao() {
         if (instanceBucketDao == null) {
-            instanceBucketDao = new BucketDaoImpl();
+            instanceBucketDao = new BucketDaoJdbcImpl(connection);
         }
         return instanceBucketDao;
     }
 
     public static OrderDao getInstanceOrderDao() {
         if (instanceOrderDao == null) {
-            instanceOrderDao = new OrderDaoImpl();
+            instanceOrderDao = new OrderDaoJdbcImpl(connection);
         }
         return instanceOrderDao;
     }
@@ -102,4 +101,3 @@ public class Factory {
         return instanceOrderService;
     }
 }
-

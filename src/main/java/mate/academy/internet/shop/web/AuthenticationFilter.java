@@ -11,12 +11,15 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import mate.academy.internet.shop.exceptions.DataProcessingException;
 import mate.academy.internet.shop.lib.Inject;
 import mate.academy.internet.shop.service.UserService;
+import org.apache.log4j.Logger;
 
 public class AuthenticationFilter implements Filter {
     @Inject
     private static UserService userService;
+    private static final Logger LOGGER = Logger.getLogger(AuthenticationFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -29,11 +32,15 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         Long userId = (Long) request.getSession().getAttribute("userId");
-        if (request.getCookies() == null
-                || userId == null
-                || userService.get(userId) == null) {
-            processUnAuthenticated(request, response);
-            return;
+        try {
+            if (userId == null || userService.get(userId) == null) {
+                processUnAuthenticated(request, response);
+                return;
+            }
+        } catch (DataProcessingException e) {
+            LOGGER.error(e);
+            request.getRequestDispatcher("/WEB-INF/views/dataProcessingProblem.jsp")
+                    .forward(request, response);
         }
         filterChain.doFilter(servletRequest, servletResponse);
     }

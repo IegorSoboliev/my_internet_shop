@@ -3,19 +3,16 @@ package mate.academy.internet.shop.dao.impl;
 import java.util.List;
 import java.util.Optional;
 
-import mate.academy.internet.shop.dao.ItemDao;
 import mate.academy.internet.shop.database.Storage;
 import mate.academy.internet.shop.model.Item;
 
-public class ItemDaoImpl implements ItemDao {
+public class ItemDaoImpl {
 
-    @Override
     public Item create(Item item) {
         Storage.items.add(item);
         return item;
     }
 
-    @Override
     public Item update(Item item) {
         Storage.items
                 .stream()
@@ -25,7 +22,6 @@ public class ItemDaoImpl implements ItemDao {
         return item;
     }
 
-    @Override
     public Optional<Item> get(Long id) {
         return Storage.items
                 .stream()
@@ -33,12 +29,10 @@ public class ItemDaoImpl implements ItemDao {
                 .findFirst();
     }
 
-    @Override
     public List<Item> getAll() {
         return Storage.items;
     }
 
-    @Override
     public boolean deleteById(Long id) {
         return Storage.items.removeIf(i -> i.getId().equals(id));
     }

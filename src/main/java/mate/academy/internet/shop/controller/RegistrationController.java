@@ -7,12 +7,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import mate.academy.internet.shop.exceptions.DataProcessingException;
 import mate.academy.internet.shop.lib.Inject;
-import mate.academy.internet.shop.model.Role;
 import mate.academy.internet.shop.model.User;
 import mate.academy.internet.shop.service.UserService;
+import org.apache.log4j.Logger;
 
 public class RegistrationController extends HttpServlet {
+    private static final Logger LOGGER = Logger.getLogger(RegistrationController.class);
     @Inject
     private static UserService userService;
 
@@ -30,8 +32,13 @@ public class RegistrationController extends HttpServlet {
         user.setSurname(req.getParameter("user_surname"));
         user.setEmail(req.getParameter("email"));
         user.setPassword(req.getParameter("psw"));
-        user.addRole(Role.of("USER"));
-        userService.create(user);
+        try {
+            userService.create(user);
+        } catch (DataProcessingException e) {
+            LOGGER.error(e);
+            req.getRequestDispatcher("/WEB-INF/views/dataProcessingProblem.jsp")
+                    .forward(req, resp);
+        }
         resp.sendRedirect(req.getContextPath() + "/login");
     }
 }

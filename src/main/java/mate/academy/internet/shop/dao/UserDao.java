@@ -3,23 +3,20 @@ package mate.academy.internet.shop.dao;
 import java.util.List;
 import java.util.Optional;
 
+import mate.academy.internet.shop.exceptions.DataProcessingException;
 import mate.academy.internet.shop.model.User;
 
 public interface UserDao {
 
-    User create(User user);
+    User add(User user) throws DataProcessingException;
 
-    User update(User user);
+    User update(User user) throws DataProcessingException;
 
-    Optional<User> get(java.lang.Long id);
+    Optional<User> get(Long id) throws DataProcessingException;
 
-    Optional<User> getByToken(String token);
+    List<User> getAll() throws DataProcessingException;
 
-    List<User> getAll();
+    boolean deleteById(Long id) throws DataProcessingException;
 
-    boolean delete(User user);
-
-    boolean deleteById(java.lang.Long id);
-
-    Optional<User> findByLogin(String email);
+    Optional<User> login(String email, String password) throws DataProcessingException;
 }
