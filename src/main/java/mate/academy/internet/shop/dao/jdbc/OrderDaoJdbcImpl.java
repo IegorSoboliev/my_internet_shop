@@ -36,24 +36,12 @@ public class OrderDaoJdbcImpl extends AbstractDao<Order> implements OrderDao {
             while (resultSet.next()) {
                 order.setId(resultSet.getLong(1));
             }
+            addOrderItems(order);
+            return order;
         } catch (SQLException e) {
             throw new DataProcessingException("Cannot add order to database " + ORDERS
                     + " and return its id", e);
         }
-        String addOrderData = String.format("INSERT INTO "
-                + "%s (order_id, item_id) VALUES (?, ?);", ORDERS_ITEMS);
-        for (Item item : order.getItems()) {
-            try (PreparedStatement statement
-                         = connection.prepareStatement(addOrderData)) {
-                statement.setLong(1, order.getId());
-                statement.setLong(2, item.getId());
-                statement.executeUpdate();
-            } catch (SQLException e) {
-                throw new DataProcessingException("Cannot add order id and items to"
-                        + ORDERS_ITEMS, e);
-            }
-        }
-        return order;
     }
 
     @Override
@@ -112,9 +100,7 @@ public class OrderDaoJdbcImpl extends AbstractDao<Order> implements OrderDao {
     @Override
     public List<Order> getAll() throws DataProcessingException {
         List<Order> allOrders = new ArrayList<>();
-        String getUserOrders = String.format("SELECT * FROM %s INNER JOIN %s ON %s.order_id = "
-                        + "%s.order_id INNER JOIN %s ON %s.item_id = %s.item_id;", ORDERS,
-                ORDERS_ITEMS, ORDERS, ORDERS_ITEMS, ITEMS, ORDERS_ITEMS, ITEMS);
+        String getUserOrders = String.format("SELECT * FROM %s;", ORDERS);
         try (PreparedStatement statement = connection.prepareStatement(getUserOrders);) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -156,8 +142,8 @@ public class OrderDaoJdbcImpl extends AbstractDao<Order> implements OrderDao {
                 + "%s (order_id, item_id) VALUES (?, ?);", ORDERS_ITEMS);
         try (PreparedStatement statement
                      = connection.prepareStatement(addOrderData)) {
-            statement.setLong(1, order.getId());
             for (Item item : order.getItems()) {
+                statement.setLong(1, order.getId());
                 statement.setLong(2, item.getId());
                 statement.executeUpdate();
             }

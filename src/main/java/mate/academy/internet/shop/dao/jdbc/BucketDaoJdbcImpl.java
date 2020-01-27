@@ -36,8 +36,7 @@ public class BucketDaoJdbcImpl extends AbstractDao implements BucketDao {
             while (resultSet.next()) {
                 bucket.setId(resultSet.getLong(1));
             }
-            addBucketItems(bucket);
-            return bucket;
+            return addBucketItems(bucket);
         } catch (SQLException e) {
             throw new DataProcessingException("Cannot add bucket to database " + BUCKETS + " and "
                     + "return its id", e);
@@ -55,8 +54,8 @@ public class BucketDaoJdbcImpl extends AbstractDao implements BucketDao {
     public Optional<Bucket> get(Long id) throws DataProcessingException {
         Bucket toFind = new Bucket();
         String getBucket = String.format("SELECT * FROM %s INNER JOIN %s ON %s.bucket_id = "
-                + "%s.bucket_id INNER JOIN %s ON %s.item_id = %s.item_id WHERE %s.bucket_id "
-                + "= ?;", BUCKETS, BUCKETS_ITEMS, BUCKETS, BUCKETS_ITEMS, ITEMS, BUCKETS_ITEMS,
+                        + "%s.bucket_id INNER JOIN %s ON %s.item_id = %s.item_id WHERE %s.bucket_id "
+                        + "= ?;", BUCKETS, BUCKETS_ITEMS, BUCKETS, BUCKETS_ITEMS, ITEMS, BUCKETS_ITEMS,
                 ITEMS, BUCKETS);
         try (PreparedStatement statement
                      = connection.prepareStatement(getBucket)) {
@@ -77,9 +76,7 @@ public class BucketDaoJdbcImpl extends AbstractDao implements BucketDao {
     @Override
     public List<Bucket> getAll() throws DataProcessingException {
         List<Bucket> allBuckets = new ArrayList<>();
-        String getallBuckets = String.format("SELECT * FROM %s INNER JOIN %s ON %s.bucket_id = "
-                        + "%s.bucket_id INNER JOIN %s ON %s.item_id = %s.item_id;", BUCKETS,
-                BUCKETS_ITEMS, BUCKETS, BUCKETS_ITEMS, ITEMS, BUCKETS_ITEMS, ITEMS);
+        String getallBuckets = String.format("SELECT * FROM %s;", BUCKETS);
         try (PreparedStatement statement = connection.prepareStatement(getallBuckets);) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -121,16 +118,17 @@ public class BucketDaoJdbcImpl extends AbstractDao implements BucketDao {
         }
     }
 
-    private void addBucketItems(Bucket bucket) throws DataProcessingException {
+    private Bucket addBucketItems(Bucket bucket) throws DataProcessingException {
         String addBucketData = String.format("INSERT INTO "
                 + "%s (bucket_id, item_id) VALUES (?, ?);", BUCKETS_ITEMS);
         try (PreparedStatement statement
                      = connection.prepareStatement(addBucketData)) {
-            statement.setLong(1, bucket.getId());
             for (Item item : bucket.getItems()) {
+                statement.setLong(1, bucket.getId());
                 statement.setLong(2, item.getId());
                 statement.executeUpdate();
             }
+            return bucket;
         } catch (SQLException e) {
             throw new DataProcessingException("Cannot add bucket id and its items to"
                     + BUCKETS_ITEMS, e);

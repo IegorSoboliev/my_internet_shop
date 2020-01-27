@@ -41,7 +41,13 @@ public class BucketServiceImpl implements BucketService {
                 .stream()
                 .filter(b -> b.getUserId().equals(userId))
                 .findFirst();
-        return bucket.orElse(bucketDao.create(new Bucket()));
+        return bucket.orElseGet(() -> {
+            try {
+                return bucketDao.create(new Bucket(userId));
+            } catch (DataProcessingException e) {
+                return new Bucket(userId);
+            }
+        });
     }
 
     @Override
@@ -51,7 +57,7 @@ public class BucketServiceImpl implements BucketService {
 
     @Override
     public void addItem(Bucket bucket, Item item) throws DataProcessingException {
-        bucketDao.get(bucket.getId()).get().getItems().add(item);
+        bucket.getItems().add(item);
         bucketDao.update(bucket);
     }
 
