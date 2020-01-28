@@ -8,7 +8,7 @@ import mate.academy.internet.shop.model.User;
 
 public interface UserDao {
 
-    User add(User user) throws DataProcessingException;
+    User create(User user) throws DataProcessingException;
 
     User update(User user) throws DataProcessingException;
 

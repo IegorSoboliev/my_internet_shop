@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(User user) throws DataProcessingException {
-        return userDao.add(user);
+        return userDao.create(user);
     }
 
     @Override

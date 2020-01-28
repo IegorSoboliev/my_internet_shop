@@ -26,24 +26,10 @@ public class RemoveItemFromBucketController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         Long userId = (Long) req.getSession().getAttribute("userId");
-        Bucket bucket = null;
         try {
-            bucket = bucketService.getByUserId(userId);
-        } catch (DataProcessingException e) {
-            LOGGER.error(e);
-            req.getRequestDispatcher("/WEB-INF/views/dataProcessingProblem.jsp")
-                    .forward(req, resp);
-        }
-        String itemId = req.getParameter("item_id");
-        Item item = null;
-        try {
-            item = itemService.get(Long.valueOf(itemId));
-        } catch (DataProcessingException e) {
-            LOGGER.error(e);
-            req.getRequestDispatcher("/WEB-INF/views/dataProcessingProblem.jsp")
-                    .forward(req, resp);
-        }
-        try {
+            Bucket bucket = bucketService.getByUserId(userId);
+            String itemId = req.getParameter("item_id");
+            Item item = itemService.get(Long.valueOf(itemId));
             bucketService.deleteItem(bucket, item);
         } catch (DataProcessingException e) {
             LOGGER.error(e);

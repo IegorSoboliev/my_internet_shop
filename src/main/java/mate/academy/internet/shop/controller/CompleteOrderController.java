@@ -31,24 +31,10 @@ public class CompleteOrderController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         Long userId = (Long) req.getSession().getAttribute("userId");
-        User user = null;
         try {
-            user = userService.get(userId);
-        } catch (DataProcessingException e) {
-            LOGGER.error(e);
-            req.getRequestDispatcher("/WEB-INF/views/dataProcessingProblem.jsp")
-                    .forward(req, resp);
-        }
-        Bucket bucket = null;
-        try {
-            bucket = bucketService.getByUserId(userId);
-        } catch (DataProcessingException e) {
-            LOGGER.error(e);
-            req.getRequestDispatcher("/WEB-INF/views/dataProcessingProblem.jsp")
-                    .forward(req, resp);
-        }
-        List<Item> items = bucket.getItems();
-        try {
+            User user = userService.get(userId);
+            Bucket bucket = bucketService.getByUserId(userId);
+            List<Item> items = bucket.getItems();
             orderService.completeOrder(items, user);
         } catch (DataProcessingException e) {
             LOGGER.error(e);

@@ -54,10 +54,7 @@ public class OrderDaoJdbcImpl extends AbstractDao<Order> implements OrderDao {
     @Override
     public Optional<Order> get(Long id) throws DataProcessingException {
         Order toFind = new Order();
-        String getOrder = String.format("SELECT * FROM %s INNER JOIN %s ON %s.order_id = "
-                        + "%s.order_id INNER JOIN %s ON %s.item_id = %s.item_id WHERE %s.order_id "
-                        + "= ?;", ORDERS, ORDERS_ITEMS, ORDERS, ORDERS_ITEMS, ITEMS,
-                ORDERS_ITEMS, ITEMS, ORDERS);
+        String getOrder = String.format("SELECT * FROM %s WHERE order_id = ?;", ORDERS);
         try (PreparedStatement statement
                      = connection.prepareStatement(getOrder)) {
             statement.setLong(1, id);
@@ -66,27 +63,24 @@ public class OrderDaoJdbcImpl extends AbstractDao<Order> implements OrderDao {
                 toFind.setId(resultSet.getLong("order_id"));
                 toFind.setId(resultSet.getLong("user_id"));
                 toFind.setItems(copyOrderItems(toFind));
-                return Optional.of(toFind);
             }
+            return Optional.of(toFind);
         } catch (SQLException e) {
             throw new DataProcessingException("Cannot show user from database " + ORDERS, e);
         }
-        return Optional.empty();
     }
 
     @Override
     public List<Order> getUserOrders(Long userId) throws DataProcessingException {
         List<Order> userOrders = new ArrayList<>();
-        String getUserOrders = String.format("SELECT * FROM %s INNER JOIN %s ON %s.order_id = "
-                        + "%s.order_id INNER JOIN %s ON %s.item_id = %s.item_id WHERE "
-                        + "%s.user_id = ?;", ORDERS, ORDERS_ITEMS, ORDERS, ORDERS_ITEMS, ITEMS,
-                ORDERS_ITEMS, ITEMS, ORDERS);
+        String getUserOrders = String.format("SELECT * FROM %s WHERE user_id = ?;", ORDERS);
         try (PreparedStatement statement = connection.prepareStatement(getUserOrders);) {
             statement.setLong(1, userId);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Order found = new Order();
                 found.setId(resultSet.getLong("order_id"));
+                found.setUserId(userId);
                 found.setItems(copyOrderItems(found));
                 userOrders.add(found);
             }

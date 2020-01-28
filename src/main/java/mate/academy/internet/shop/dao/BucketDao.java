@@ -14,6 +14,8 @@ public interface BucketDao {
 
     Optional<Bucket> get(Long id) throws DataProcessingException;
 
+    Optional<Bucket> getByUserId(Long userId) throws DataProcessingException;
+
     boolean deleteById(Long id) throws DataProcessingException;
 
     List<Bucket> getAll() throws DataProcessingException;

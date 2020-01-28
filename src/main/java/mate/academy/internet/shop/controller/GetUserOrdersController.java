@@ -28,19 +28,14 @@ public class GetUserOrdersController extends HttpServlet {
             throws ServletException, IOException {
         Long userId = (Long) req.getSession().getAttribute("userId");
         User user = null;
+        List<Order> orders = null;
         try {
             user = userService.get(userId);
+            orders = orderService.getUserOrders(user);
         } catch (DataProcessingException e) {
             LOGGER.error(e);
             req.getRequestDispatcher("/WEB-INF/views/dataProcessingProblem.jsp")
                     .forward(req, resp);
-        }
-        List<Order> orders = null;
-        try {
-            orders = orderService.getUserOrders(user);
-        } catch (DataProcessingException e) {
-            LOGGER.error(e);
-            req.getRequestDispatcher("/WEB-INF/views/dataProcessingProblem.jsp").forward(req, resp);
         }
         req.setAttribute("greeting", "userName");
         req.setAttribute("orders", orders);

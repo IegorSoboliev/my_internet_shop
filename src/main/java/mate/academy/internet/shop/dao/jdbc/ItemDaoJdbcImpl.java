@@ -113,11 +113,10 @@ public class ItemDaoJdbcImpl extends AbstractDao<Item> implements ItemDao {
         return item;
     }
 
-    private boolean deleteItemData(String query, Long itemId) throws DataProcessingException {
+    private void deleteItemData(String query, Long itemId) throws DataProcessingException {
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, itemId);
             statement.executeUpdate();
-            return true;
         } catch (SQLException e) {
             throw new DataProcessingException("Cannot delete item from database", e);
         }
