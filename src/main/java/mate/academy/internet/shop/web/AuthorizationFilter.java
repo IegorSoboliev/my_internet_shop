@@ -16,16 +16,19 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import mate.academy.internet.shop.exceptions.DataProcessingException;
 import mate.academy.internet.shop.lib.Inject;
 import mate.academy.internet.shop.model.Role;
 import mate.academy.internet.shop.model.User;
 import mate.academy.internet.shop.service.UserService;
+import org.apache.log4j.Logger;
 
 public class AuthorizationFilter implements Filter {
     @Inject
     private static UserService userService;
     private Map<String, Role.RoleName> onlyAdminUrls = new HashMap<>();
     private Map<String, Role.RoleName> onlyUserUrls = new HashMap<>();
+    private static final Logger LOGGER = Logger.getLogger(AuthorizationFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -58,7 +61,14 @@ public class AuthorizationFilter implements Filter {
         }
 
         Long userId = (Long) request.getSession().getAttribute("userId");
-        User user = userService.get(userId);
+        User user = null;
+        try {
+            user = userService.get(userId);
+        } catch (DataProcessingException e) {
+            LOGGER.error(e);
+            request.getRequestDispatcher("/WEB-INF/views/dataProcessingProblem.jsp")
+                    .forward(request, response);
+        }
         if (verifyRole(user, rolesAdmin) || verifyRole(user, rolesUser)) {
             processAuthorized(filterChain, request, response);
             return;

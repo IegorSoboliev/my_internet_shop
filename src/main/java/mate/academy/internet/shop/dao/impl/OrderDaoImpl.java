@@ -3,21 +3,18 @@ package mate.academy.internet.shop.dao.impl;
 import java.util.List;
 import java.util.Optional;
 
-import mate.academy.internet.shop.dao.OrderDao;
 import mate.academy.internet.shop.database.Storage;
 import mate.academy.internet.shop.lib.Dao;
 import mate.academy.internet.shop.model.Order;
 
 @Dao
-public class OrderDaoImpl implements OrderDao {
+public class OrderDaoImpl {
 
-    @Override
     public Order create(Order order) {
         Storage.orders.add(order);
         return order;
     }
 
-    @Override
     public Order update(Order order) {
         Storage.orders
                 .stream()
@@ -27,7 +24,6 @@ public class OrderDaoImpl implements OrderDao {
         return order;
     }
 
-    @Override
     public Optional<Order> get(Long id) {
         return Storage.orders
                 .stream()
@@ -35,17 +31,14 @@ public class OrderDaoImpl implements OrderDao {
                 .findFirst();
     }
 
-    @Override
-    public List<Order> getAll() {
+    public List<Order> getUserOrders() {
         return Storage.orders;
     }
 
-    @Override
     public boolean delete(Order order) {
         return Storage.orders.remove(order);
     }
 
-    @Override
     public boolean deleteById(Long id) {
         return Storage.orders.removeIf(o -> o.getId().equals(id));
     }

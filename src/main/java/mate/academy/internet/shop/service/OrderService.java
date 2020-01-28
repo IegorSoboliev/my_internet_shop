@@ -2,25 +2,22 @@ package mate.academy.internet.shop.service;
 
 import java.util.List;
 
+import mate.academy.internet.shop.exceptions.DataProcessingException;
 import mate.academy.internet.shop.model.Item;
 import mate.academy.internet.shop.model.Order;
 import mate.academy.internet.shop.model.User;
 
 public interface OrderService {
 
-    Order create(Order order);
+    Order update(Order order) throws DataProcessingException;
 
-    Order update(Order order);
+    Order get(Long id) throws DataProcessingException;
 
-    Order get(Long id);
+    List<Order> getAll() throws DataProcessingException;
 
-    List<Order> getAll();
+    boolean deleteById(Long id) throws DataProcessingException;
 
-    boolean delete(Order order);
+    Order completeOrder(List<Item> items, User user) throws DataProcessingException;
 
-    boolean deleteById(Long id);
-
-    Order completeOrder(List<Item> items, User user);
-
-    List<Order> getUserOrders(User user);
+    List<Order> getUserOrders(User user) throws DataProcessingException;
 }

@@ -1,6 +1,7 @@
 package mate.academy.internet.shop.model;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class User {
@@ -9,7 +10,6 @@ public class User {
     private String surname;
     private String email;
     private String password;
-    private String token;
     private Set<Role> roles = new HashSet<>();
 
     public Long getId() {
@@ -52,14 +52,6 @@ public class User {
         this.password = password;
     }
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
     public Set<Role> getRoles() {
         return roles;
     }
@@ -73,13 +65,31 @@ public class User {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        User user = (User) o;
+        return id.equals(user.id) && name.equals(user.name) && surname.equals(user.surname)
+                && email.equals(user.email) && password.equals(user.password)
+                && roles.equals(user.roles);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, surname, email, password, roles);
+    }
+
+    @Override
     public String toString() {
         return "User{" + "id=" + id
                 + ", name='" + name + '\''
                 + ", surname='" + surname + '\''
                 + ", email='" + email + '\''
                 + ", password='" + password + '\''
-                + ", token='" + token + '\''
                 + ", roles=" + roles + '}';
     }
 }

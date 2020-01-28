@@ -1,26 +1,23 @@
 package mate.academy.internet.shop.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import mate.academy.internet.shop.exceptions.AuthenticationException;
+import mate.academy.internet.shop.exceptions.DataProcessingException;
 import mate.academy.internet.shop.model.User;
 
 public interface UserService {
 
-    User create(User user);
+    User create(User user) throws DataProcessingException;
 
-    User update(User user);
+    User update(User user) throws DataProcessingException;
 
-    User get(java.lang.Long id);
+    User get(Long id) throws DataProcessingException;
 
-    Optional<User> findByToken(String token);
+    List<User> getAll() throws DataProcessingException;
 
-    List<User> getAll();
+    boolean deleteById(Long id) throws DataProcessingException;
 
-    boolean delete(User user);
-
-    boolean deleteById(java.lang.Long id);
-
-    User login(String email, String password) throws AuthenticationException;
+    User login(String email, String password) throws AuthenticationException,
+            DataProcessingException;
 }
