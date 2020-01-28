@@ -10,7 +10,7 @@ CREATE TABLE `storage`.`buckets_items` (
 
 CREATE TABLE `storage`.`users_roles` (
                                          `user_id` INT NULL,
-                                         `role_id` INT NULL);
+                                         `role_id` INT NULL DEFAULT 1);
 
 CREATE TABLE `storage`.`buckets` (
                                      `bucket_id` INT NOT NULL AUTO_INCREMENT,
@@ -30,7 +30,7 @@ CREATE TABLE `storage`.`orders` (
 
 CREATE TABLE `storage`.`roles` (
                                    `role_id` INT NOT NULL AUTO_INCREMENT,
-                                   `role_name` VARCHAR(45) NOT NULL DEFAULT 'USER',
+                                   `role_name` VARCHAR(45) NOT NULL,
                                    PRIMARY KEY (`role_id`));
 
 CREATE TABLE `storage`.`users` (
@@ -88,3 +88,8 @@ ALTER TABLE `storage`.`users_roles`
             REFERENCES `storage`.`roles` (`role_id`)
             ON DELETE CASCADE
             ON UPDATE CASCADE;
+
+INSERT INTO `storage`.`roles` (`role_id`, `role_name`) VALUES ('1', 'USER');
+INSERT INTO `storage`.`roles` (`role_id`, `role_name`) VALUES ('2', 'ADMIN');
+
+UPDATE users_roles SET role_id = 2 WHERE user_id = 1;

@@ -46,9 +46,8 @@ public class UserDaoJdbcImpl extends AbstractDao implements UserDao {
             statement.setString(4, user.getPassword());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
-            resultSet.next(); {
-                user.setId(resultSet.getLong(1));
-            }
+            resultSet.next();
+            user.setId(resultSet.getLong(1));
         } catch (SQLException e) {
             throw new DataProcessingException("Cannot add user to database " + USERS
                     + " and return its id", e);
@@ -89,11 +88,8 @@ public class UserDaoJdbcImpl extends AbstractDao implements UserDao {
                      = connection.prepareStatement(getUser)) {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
-//            while (resultSet.next())
             resultSet.next();
-            {
-                return Optional.of(copyUserFromDB(id));
-            }
+            return Optional.of(copyUserFromDB(id));
         } catch (SQLException e) {
             throw new DataProcessingException("Cannot show user from database " + USERS, e);
         }
@@ -142,9 +138,7 @@ public class UserDaoJdbcImpl extends AbstractDao implements UserDao {
             statement.setString(2, password);
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
-            {
-                userId = resultSet.getLong("user_id");
-            }
+            userId = resultSet.getLong("user_id");
             return Optional.of(copyUserFromDB(userId));
         } catch (SQLException e) {
             throw new DataProcessingException("Cannot found user in database " + USERS, e);
@@ -189,4 +183,3 @@ public class UserDaoJdbcImpl extends AbstractDao implements UserDao {
         }
     }
 }
-

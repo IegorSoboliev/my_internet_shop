@@ -34,9 +34,8 @@ public class ItemDaoJdbcImpl extends AbstractDao<Item> implements ItemDao {
             statement.setInt(2, item.getPrice());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
-            while (resultSet.next()) {
-                item.setId(resultSet.getLong(1));
-            }
+            resultSet.next();
+            item.setId(resultSet.getLong(1));
             return item;
         } catch (SQLException e) {
             throw new DataProcessingException("Cannot add item to database " + ITEMS, e);
@@ -64,13 +63,11 @@ public class ItemDaoJdbcImpl extends AbstractDao<Item> implements ItemDao {
         try (PreparedStatement statement = connection.prepareStatement(getItem)) {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                return Optional.of(copyItemFromDB(resultSet));
-            }
+            resultSet.next();
+            return Optional.of(copyItemFromDB(resultSet));
         } catch (SQLException e) {
             throw new DataProcessingException("Cannot show item from database " + ITEMS, e);
         }
-        return Optional.empty();
     }
 
     @Override

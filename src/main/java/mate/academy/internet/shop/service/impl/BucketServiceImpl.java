@@ -76,5 +76,4 @@ public class BucketServiceImpl implements BucketService {
     public List<Bucket> getAll() throws DataProcessingException {
         return bucketDao.getAll();
     }
-
 }
