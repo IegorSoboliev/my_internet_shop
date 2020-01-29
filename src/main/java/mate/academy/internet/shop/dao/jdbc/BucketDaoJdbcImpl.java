@@ -33,13 +33,15 @@ public class BucketDaoJdbcImpl extends AbstractDao implements BucketDao {
             statement.setLong(1, bucket.getUserId());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
-            resultSet.next();
-            bucket.setId(resultSet.getLong(1));
-            return addBucketItems(bucket);
+            if (resultSet.next()) {
+                bucket.setId(resultSet.getLong(1));
+                return addBucketItems(bucket);
+            }
         } catch (SQLException e) {
             throw new DataProcessingException("Cannot add bucket to database " + BUCKETS + " and "
                     + "return its id", e);
         }
+        return bucket;
     }
 
     @Override

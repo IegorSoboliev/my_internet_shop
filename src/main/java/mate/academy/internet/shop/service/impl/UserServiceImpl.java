@@ -1,7 +1,11 @@
 package mate.academy.internet.shop.service.impl;
 
+import static mate.academy.internet.shop.util.HashUtil.getSalt;
+import static mate.academy.internet.shop.util.HashUtil.hashPassword;
+
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import mate.academy.internet.shop.dao.UserDao;
 import mate.academy.internet.shop.exceptions.AuthenticationException;
@@ -18,6 +22,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(User user) throws DataProcessingException {
+        byte[] salt = getSalt();
+        String enteredPassword = user.getPassword();
+        String hashedPassword = hashPassword(enteredPassword, salt);
+        user.setSalt(salt);
+        user.setPassword(hashedPassword);
         return userDao.create(user);
     }
 
@@ -43,9 +52,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User login(String email, String password) throws AuthenticationException,
+    public User login(String email, String enteredPassword) throws AuthenticationException,
             DataProcessingException {
-        return userDao.login(email, password)
-                .orElseThrow(() -> new AuthenticationException("Incorrect login or password"));
+        Optional<User> user = userDao.verifyEmail(email);
+        if (user.isEmpty()
+                || !hashPassword(enteredPassword, user.get().getSalt())
+                .equals(user.get().getPassword())) {
+            throw new AuthenticationException("Incorrect login or password");
+        }
+        return user.get();
     }
 }
