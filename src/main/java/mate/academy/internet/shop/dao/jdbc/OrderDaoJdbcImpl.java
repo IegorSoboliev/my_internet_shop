@@ -33,14 +33,15 @@ public class OrderDaoJdbcImpl extends AbstractDao<Order> implements OrderDao {
             statement.setLong(1, order.getUserId());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
-            resultSet.next();
-            order.setId(resultSet.getLong(1));
-            addOrderItems(order);
-            return order;
+            if (resultSet.next()) {
+                order.setId(resultSet.getLong(1));
+                addOrderItems(order);
+            }
         } catch (SQLException e) {
             throw new DataProcessingException("Cannot add order to database " + ORDERS
                     + " and return its id", e);
         }
+        return order;
     }
 
     @Override
@@ -146,7 +147,7 @@ public class OrderDaoJdbcImpl extends AbstractDao<Order> implements OrderDao {
         }
     }
 
-    public void removeOrderItemsFromDB(Order order) throws DataProcessingException {
+    private void removeOrderItemsFromDB(Order order) throws DataProcessingException {
         String deleteOrderItems = String.format("DELETE FROM %s WHERE order_id = ?;",
                 ORDERS_ITEMS);
         try (PreparedStatement statement = connection.prepareStatement(deleteOrderItems)) {

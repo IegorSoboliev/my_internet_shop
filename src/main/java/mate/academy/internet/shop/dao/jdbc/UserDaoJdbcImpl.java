@@ -36,18 +36,20 @@ public class UserDaoJdbcImpl extends AbstractDao implements UserDao {
 
     @Override
     public User create(User user) throws DataProcessingException {
-        String addUser = String.format("INSERT INTO %s (name, surname, email, password) "
-                + "VALUES (?,?,?,?);", USERS);
+        String addUser = String.format("INSERT INTO %s (name, surname, email, password, salt) "
+                + "VALUES (?,?,?,?,?);", USERS);
         try (PreparedStatement statement
                      = connection.prepareStatement(addUser, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, user.getName());
             statement.setString(2, user.getSurname());
             statement.setString(3, user.getEmail());
             statement.setString(4, user.getPassword());
+            statement.setBytes(5, user.getSalt());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
-            resultSet.next();
-            user.setId(resultSet.getLong(1));
+            if (resultSet.next()) {
+                user.setId(resultSet.getLong(1));
+            }
         } catch (SQLException e) {
             throw new DataProcessingException("Cannot add user to database " + USERS
                     + " and return its id", e);
@@ -67,13 +69,14 @@ public class UserDaoJdbcImpl extends AbstractDao implements UserDao {
     @Override
     public User update(User user) throws DataProcessingException {
         String updateUser = String.format("UPDATE %s SET name = ?, surname = ?, email = ?, "
-                + "password = ? WHERE user_id = ?", USERS);
+                + "password = ?, salt = ? WHERE user_id = ?", USERS);
         try (PreparedStatement statement = connection.prepareStatement(updateUser)) {
             statement.setString(1, user.getName());
             statement.setString(2, user.getSurname());
             statement.setString(3, user.getEmail());
             statement.setString(4, user.getPassword());
-            statement.setLong(5, user.getId());
+            statement.setBytes(5, user.getSalt());
+            statement.setLong(6, user.getId());
             statement.executeUpdate();
             return user;
         } catch (SQLException e) {
@@ -88,11 +91,13 @@ public class UserDaoJdbcImpl extends AbstractDao implements UserDao {
                      = connection.prepareStatement(getUser)) {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
-            resultSet.next();
-            return Optional.of(copyUserFromDB(id));
+            if (resultSet.next()) {
+                return Optional.ofNullable(copyUserFromDB(id));
+            }
         } catch (SQLException e) {
             throw new DataProcessingException("Cannot show user from database " + USERS, e);
         }
+        return Optional.empty();
     }
 
     @Override
@@ -103,10 +108,10 @@ public class UserDaoJdbcImpl extends AbstractDao implements UserDao {
                      = connection.prepareStatement(getAllUsers)) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                User found = new User();
-                found.setId(resultSet.getLong("user_id"));
-                found = copyUserFromDB(found.getId());
-                allUsers.add(found);
+                User foundUser = copyUserFromDB(resultSet.getLong("user_id"));
+                if (foundUser != null) {
+                    allUsers.add(foundUser);
+                }
             }
             return allUsers;
         } catch (SQLException e) {
@@ -129,24 +134,25 @@ public class UserDaoJdbcImpl extends AbstractDao implements UserDao {
     }
 
     @Override
-    public Optional<User> login(String email, String password) throws DataProcessingException {
+    public Optional<User> verifyEmail(String email) throws DataProcessingException {
         Long userId = null;
-        String verifyUser = String.format("SELECT user_id FROM %s "
-                + "WHERE email = ? AND password = ?;", USERS);
-        try (PreparedStatement statement = connection.prepareStatement(verifyUser)) {
+        String userVerified = String.format("SELECT user_id FROM %s "
+                + "WHERE email = ?;", USERS);
+        try (PreparedStatement statement = connection.prepareStatement(userVerified)) {
             statement.setString(1, email);
-            statement.setString(2, password);
             ResultSet resultSet = statement.executeQuery();
-            resultSet.next();
-            userId = resultSet.getLong("user_id");
-            return Optional.of(copyUserFromDB(userId));
+            if (resultSet.next()) {
+                userId = resultSet.getLong("user_id");
+                return Optional.ofNullable(copyUserFromDB(userId));
+            }
         } catch (SQLException e) {
             throw new DataProcessingException("Cannot found user in database " + USERS, e);
         }
+        return Optional.empty();
     }
 
     private User copyUserFromDB(Long userId) throws SQLException, DataProcessingException {
-        User found = new User();
+        User user = null;
         String getUser = String.format("SELECT * FROM %s INNER JOIN %s ON %s.user_id = %s.user_id "
                         + "INNER JOIN %s ON %s.role_id = %s.role_id "
                         + "WHERE %s.user_id = ?;",
@@ -156,19 +162,24 @@ public class UserDaoJdbcImpl extends AbstractDao implements UserDao {
             statement.setLong(1, userId);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                String name = resultSet.getString("name");
-                String surname = resultSet.getString("surname");
-                String email = resultSet.getString("email");
-                String password = resultSet.getString("password");
+                if (user == null) {
+                    user = new User();
+                    String name = resultSet.getString("name");
+                    String surname = resultSet.getString("surname");
+                    String email = resultSet.getString("email");
+                    String password = resultSet.getString("password");
+                    byte[] salt = resultSet.getBytes("salt");
+                    user.setId(userId);
+                    user.setName(name);
+                    user.setSurname(surname);
+                    user.setEmail(email);
+                    user.setPassword(password);
+                    user.setSalt(salt);
+                }
                 String role = resultSet.getString("role_name");
-                found.setId(userId);
-                found.setName(name);
-                found.setSurname(surname);
-                found.setEmail(email);
-                found.setPassword(password);
-                found.addRole(Role.of(role));
+                user.addRole(Role.of(role));
             }
-            return found;
+            return user;
         } catch (SQLException e) {
             throw new DataProcessingException("Cannot found user in database " + USERS, e);
         }

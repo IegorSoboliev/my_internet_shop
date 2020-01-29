@@ -92,4 +92,11 @@ ALTER TABLE `storage`.`users_roles`
 INSERT INTO `storage`.`roles` (`role_id`, `role_name`) VALUES ('1', 'USER');
 INSERT INTO `storage`.`roles` (`role_id`, `role_name`) VALUES ('2', 'ADMIN');
 
+ALTER TABLE `storage`.`users`
+    ADD COLUMN `salt` VARBINARY(600) NULL AFTER `password`;
+
+ALTER TABLE `storage`.`users`
+    CHANGE COLUMN `password` `password` VARBINARY(600) NOT NULL ;
+
+
 UPDATE users_roles SET role_id = 2 WHERE user_id = 1;
