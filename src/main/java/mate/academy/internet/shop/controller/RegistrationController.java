@@ -34,12 +34,11 @@ public class RegistrationController extends HttpServlet {
         user.setEmail(req.getParameter("email"));
         user.setPassword(req.getParameter("psw"));
         try {
-            try {
-                userService.create(user);
-            } catch (EmailAlreadyRegisteredException e) {
-                req.setAttribute("errorEmailAlready", "This email already registered");
-                req.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(req, resp);
-            }
+            userService.create(user);
+        } catch (EmailAlreadyRegisteredException e) {
+            LOGGER.error(e);
+            req.setAttribute("errorEmailAlready", "This email already registered");
+            req.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(req, resp);
         } catch (DataProcessingException e) {
             LOGGER.error(e);
             req.getRequestDispatcher("/WEB-INF/views/dataProcessingProblem.jsp")
