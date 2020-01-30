@@ -4,7 +4,9 @@
     <title>Registration</title>
 </head>
 <body>
-Please, register or sign in
+
+<div>${errorEmailAlready}</div>
+
 <form action="${pageContext.request.contextPath}/registration" method="post">
     <div class="container">
         <h1>Register</h1>

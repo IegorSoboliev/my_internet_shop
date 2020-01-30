@@ -4,11 +4,12 @@ import java.util.List;
 
 import mate.academy.internet.shop.exceptions.AuthenticationException;
 import mate.academy.internet.shop.exceptions.DataProcessingException;
+import mate.academy.internet.shop.exceptions.EmailAlreadyRegisteredException;
 import mate.academy.internet.shop.model.User;
 
 public interface UserService {
 
-    User create(User user) throws DataProcessingException;
+    User create(User user) throws DataProcessingException, EmailAlreadyRegisteredException;
 
     User update(User user) throws DataProcessingException;
 

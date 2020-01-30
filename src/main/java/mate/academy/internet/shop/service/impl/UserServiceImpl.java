@@ -10,6 +10,7 @@ import java.util.Optional;
 import mate.academy.internet.shop.dao.UserDao;
 import mate.academy.internet.shop.exceptions.AuthenticationException;
 import mate.academy.internet.shop.exceptions.DataProcessingException;
+import mate.academy.internet.shop.exceptions.EmailAlreadyRegisteredException;
 import mate.academy.internet.shop.lib.Inject;
 import mate.academy.internet.shop.lib.Service;
 import mate.academy.internet.shop.model.User;
@@ -21,7 +22,10 @@ public class UserServiceImpl implements UserService {
     private static UserDao userDao;
 
     @Override
-    public User create(User user) throws DataProcessingException {
+    public User create(User user) throws DataProcessingException, EmailAlreadyRegisteredException {
+        if (userDao.verifyEmail(user.getEmail()).isPresent()) {
+            throw new EmailAlreadyRegisteredException("This email already registered");
+        }
         byte[] salt = getSalt();
         String enteredPassword = user.getPassword();
         String hashedPassword = hashPassword(enteredPassword, salt);
