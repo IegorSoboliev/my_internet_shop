@@ -130,6 +130,15 @@
         <url-pattern>/servlet/logout</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>dataProcessingErrorController</servlet-name>
+        <servlet-class>mate.academy.internet.shop.controller.DataProcessingErrorController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dataProcessingErrorController</servlet-name>
+        <url-pattern>/dataProcessingError</url-pattern>
+    </servlet-mapping>
+
     <filter>
         <filter-name>authenticationFilter</filter-name>
         <filter-class>mate.academy.internet.shop.web.AuthenticationFilter</filter-class>
