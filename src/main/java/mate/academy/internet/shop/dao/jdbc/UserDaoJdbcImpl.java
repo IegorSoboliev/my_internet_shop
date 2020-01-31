@@ -127,7 +127,7 @@ public class UserDaoJdbcImpl extends AbstractDao implements UserDao {
     }
 
     @Override
-    public Optional<User> findUserById(String email) throws DataProcessingException {
+    public Optional<User> findUserByEmail(String email) throws DataProcessingException {
         String findUserByEmail = String.format("SELECT user_id FROM %s "
                 + "WHERE email = ?;", USERS);
         try (PreparedStatement statement = connection.prepareStatement(findUserByEmail)) {
@@ -183,6 +183,18 @@ public class UserDaoJdbcImpl extends AbstractDao implements UserDao {
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DataProcessingException("Cannot delete user from database", e);
+        }
+    }
+
+    public void setAdminRole(User user) throws DataProcessingException {
+        String setAdminRole = String.format("UPDATE %s SET role_id = 2 WHERE user_id = ?",
+                USERS_ROLES);
+        try (PreparedStatement statement = connection.prepareStatement(setAdminRole)) {
+            statement.setLong(1, user.getId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DataProcessingException("Cannot set ADMIN role for user with id "
+                    + user.getId(), e);
         }
     }
 }

@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(User user) throws DataProcessingException, EmailAlreadyRegisteredException {
-        if (userDao.findUserById(user.getEmail()).isPresent()) {
+        if (userDao.findUserByEmail(user.getEmail()).isPresent()) {
             throw new EmailAlreadyRegisteredException("This email already registered");
         }
         byte[] salt = getSalt();
@@ -57,12 +57,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public User login(String email, String enteredPassword) throws AuthenticationException,
             DataProcessingException {
-        Optional<User> user = userDao.findUserById(email);
+        Optional<User> user = userDao.findUserByEmail(email);
         if (user.isEmpty()
                 || !hashPassword(enteredPassword, user.get().getSalt())
                 .equals(user.get().getPassword())) {
             throw new AuthenticationException("Incorrect login or password");
         }
         return user.get();
+    }
+
+    @Override
+    public void setAdminRole(User user) throws DataProcessingException {
+        userDao.setAdminRole(user);
     }
 }

@@ -52,7 +52,8 @@ and password for your DB to create a Connection.
 
 8. Run the project.
 
-There’s one item already added to the store - a book 'Christmas carol':).
+There’s one user already registered with ADMIN role (email = "admin@yahoo.com"", password = 1).
+And two items - a book, and a flower:).
 
 # <a name="author"></a>Author
 

@@ -11,6 +11,6 @@ Welcome to our shop!
 <p><a href="${pageContext.request.contextPath}/servlet/logout">Logout</a><p>
 <p><a href="${pageContext.request.contextPath}/servlet/bucket">Your bucket</a></p>
 <p><a href="${pageContext.request.contextPath}/servlet/getUserOrders">Your orders</a></p>
-<p><a href="${pageContext.request.contextPath}/servlet/getAllUsers">All registered users</a></p>
+<p><a href="${pageContext.request.contextPath}/servlet/getAllUsers">View all registered users (for admins only)</a></p>
 </body>
 </html>

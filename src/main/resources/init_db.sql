@@ -96,3 +96,4 @@ ALTER TABLE `storage`.`users`
     ADD COLUMN `salt` VARBINARY(600) NULL AFTER `password`;
 
 INSERT INTO `storage`.`items` (`item_name`, `price`) VALUES ('\'Christmas carol\'', '125');
+INSERT INTO `storage`.`items` (`item_name`, `price`) VALUES ('smile', '50');

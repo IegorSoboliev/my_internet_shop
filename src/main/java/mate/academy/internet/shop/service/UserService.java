@@ -21,4 +21,6 @@ public interface UserService {
 
     User login(String email, String password) throws AuthenticationException,
             DataProcessingException;
+
+    void setAdminRole(User user) throws DataProcessingException;
 }
