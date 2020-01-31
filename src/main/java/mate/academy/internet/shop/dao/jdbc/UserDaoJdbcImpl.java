@@ -9,12 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import mate.academy.internet.shop.dao.BucketDao;
-import mate.academy.internet.shop.dao.OrderDao;
 import mate.academy.internet.shop.dao.UserDao;
 import mate.academy.internet.shop.exceptions.DataProcessingException;
 import mate.academy.internet.shop.lib.Dao;
-import mate.academy.internet.shop.lib.Inject;
 import mate.academy.internet.shop.model.Role;
 import mate.academy.internet.shop.model.User;
 
@@ -25,10 +22,6 @@ public class UserDaoJdbcImpl extends AbstractDao implements UserDao {
     private static final String ROLES = "storage.roles";
     private static final String BUCKETS = "storage.buckets";
     private static final String ORDERS = "storage.orders";
-
-    @Inject
-    private static BucketDao bucketDao;
-    private static OrderDao orderDao;
 
     public UserDaoJdbcImpl(Connection connection) {
         super(connection);
@@ -134,15 +127,14 @@ public class UserDaoJdbcImpl extends AbstractDao implements UserDao {
     }
 
     @Override
-    public Optional<User> verifyEmail(String email) throws DataProcessingException {
-        Long userId = null;
-        String userVerified = String.format("SELECT user_id FROM %s "
+    public Optional<User> findUserById(String email) throws DataProcessingException {
+        String findUserByEmail = String.format("SELECT user_id FROM %s "
                 + "WHERE email = ?;", USERS);
-        try (PreparedStatement statement = connection.prepareStatement(userVerified)) {
+        try (PreparedStatement statement = connection.prepareStatement(findUserByEmail)) {
             statement.setString(1, email);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                userId = resultSet.getLong("user_id");
+                Long userId = resultSet.getLong("user_id");
                 return Optional.ofNullable(copyUserFromDB(userId));
             }
         } catch (SQLException e) {

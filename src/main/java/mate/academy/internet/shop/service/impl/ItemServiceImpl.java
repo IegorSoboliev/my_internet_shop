@@ -1,7 +1,6 @@
 package mate.academy.internet.shop.service.impl;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import mate.academy.internet.shop.dao.ItemDao;
 import mate.academy.internet.shop.exceptions.DataProcessingException;
@@ -28,7 +27,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public Item get(Long id) throws DataProcessingException {
         return itemDao.get(id)
-                .orElseThrow(() -> new NoSuchElementException("Found no item with id " + id));
+                .orElseThrow(() -> new DataProcessingException("Found no item with id " + id));
     }
 
     @Override

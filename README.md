@@ -12,18 +12,12 @@
 # <a name="purpose"></a>Project purpose
 This is a template for creating an e-store.
 <hr>
-It has registration and login tools for users authentication and authorization.
 
-There are controller for all visitors - displaying all items in the store.
- 
-Also specific controllers only for registered users: 
- - for adding items to user`s bucket;
- - for completing order;
- - for displaying a lists of selected items in user`s bucket or orders;
- 
- And specific controllers only for admins:
-  - for adding items to the store;
-  - for displaying a list of all users.
+Everyone can see all available items in the store. Users can register and then log-in for
+getting possibilities to add items to their personal bucket and make orders.
+
+There are specific tools for admins only to allow them adding items to the store and viewing 
+a list of all registered users.
 <hr>
 
 # <a name="structure"></a>Project Structure
@@ -38,32 +32,31 @@ Also specific controllers only for registered users:
 
 # <a name="developer-start"></a>For developer
 
-Open the project in your IDE.
+1. Open the project in your IDE.
 
-Add it as maven project.
+2. Add it as maven project.
 
-Configure Tomcat:
-
+3. Configure Tomcat:
 add artifact;
 add sdk 11.0.3
 Add sdk 11.0.3 in project struсture.
 
-Create a schema "storage" in MySQLWorkbench database.
+4. Create a schema "storage" in MySQLWorkbench database.
 
-Use my_interntet_shop.src.main.resources.init_db.sql to create all the tables required by this app.
+5. Use my_interntet_shop.src.main.resources.init_db.sql to create all the tables required by this app.
 
-At my_interntet_shop.src.main.java.mate.academy.internet.shop.factories.Factory class use your username 
+6. At my_interntet_shop.src.main.java.mate.academy.internet.shop.factories.Factory class use your username 
 and password for your DB to create a Connection.
 
-Change a path in my_interntet_shop.src.main.resources.log4j.properties. It has to reach your logFile.
+7. Change a path in my_interntet_shop.src.main.resources.log4j.properties. It has to reach your logFile.
 
-Run the project.
+8. Run the project.
 
-There’s one user with a Admin role (email = "iegor@yahoo.com"", password = 1).
+There’s one item already added to the store - a book 'Christmas carol':).
 
 # <a name="author"></a>Author
 
-https://github.com/IegorSoboliev
+[Iegor Soboliev]https://github.com/IegorSoboliev
 
 
 

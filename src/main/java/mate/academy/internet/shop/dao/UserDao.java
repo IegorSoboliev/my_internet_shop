@@ -18,5 +18,5 @@ public interface UserDao {
 
     boolean deleteById(Long id) throws DataProcessingException;
 
-    Optional<User> verifyEmail(String email) throws DataProcessingException;
+    Optional<User> findUserById(String email) throws DataProcessingException;
 }

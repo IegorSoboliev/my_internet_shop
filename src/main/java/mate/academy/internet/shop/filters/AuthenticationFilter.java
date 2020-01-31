@@ -1,4 +1,4 @@
-package mate.academy.internet.shop.web;
+package mate.academy.internet.shop.filters;
 
 import java.io.IOException;
 
@@ -22,7 +22,7 @@ public class AuthenticationFilter implements Filter {
     private static final Logger LOGGER = Logger.getLogger(AuthenticationFilter.class);
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
     }
 
     @Override

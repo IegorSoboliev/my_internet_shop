@@ -4,7 +4,6 @@ import static mate.academy.internet.shop.util.HashUtil.getSalt;
 import static mate.academy.internet.shop.util.HashUtil.hashPassword;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import mate.academy.internet.shop.dao.UserDao;
@@ -23,7 +22,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(User user) throws DataProcessingException, EmailAlreadyRegisteredException {
-        if (userDao.verifyEmail(user.getEmail()).isPresent()) {
+        if (userDao.findUserById(user.getEmail()).isPresent()) {
             throw new EmailAlreadyRegisteredException("This email already registered");
         }
         byte[] salt = getSalt();
@@ -42,7 +41,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User get(Long id) throws DataProcessingException {
         return userDao.get(id)
-                .orElseThrow(() -> new NoSuchElementException("Found no user with id " + id));
+                .orElseThrow(() -> new DataProcessingException("Found no user with id " + id));
     }
 
     @Override
@@ -58,7 +57,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User login(String email, String enteredPassword) throws AuthenticationException,
             DataProcessingException {
-        Optional<User> user = userDao.verifyEmail(email);
+        Optional<User> user = userDao.findUserById(email);
         if (user.isEmpty()
                 || !hashPassword(enteredPassword, user.get().getSalt())
                 .equals(user.get().getPassword())) {

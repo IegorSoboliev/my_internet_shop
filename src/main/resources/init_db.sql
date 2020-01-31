@@ -95,4 +95,4 @@ INSERT INTO `storage`.`roles` (`role_id`, `role_name`) VALUES ('2', 'ADMIN');
 ALTER TABLE `storage`.`users`
     ADD COLUMN `salt` VARBINARY(600) NULL AFTER `password`;
 
-UPDATE users_roles SET role_id = 2 WHERE user_id = 1;
+INSERT INTO `storage`.`items` (`item_name`, `price`) VALUES ('\'Christmas carol\'', '125');

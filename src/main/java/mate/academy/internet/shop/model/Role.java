@@ -1,17 +1,10 @@
 package mate.academy.internet.shop.model;
 
-import mate.academy.internet.shop.web.RoleIdGenerator;
-
 public class Role {
-    private final Long id;
+    private int id;
     private RoleName roleName;
 
-    public Role() {
-        this.id = RoleIdGenerator.getIdGenerator();
-    }
-
     public Role(RoleName roleName) {
-        this();
         this.roleName = roleName;
     }
 
@@ -19,7 +12,7 @@ public class Role {
         return new Role(RoleName.valueOf(roleName));
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 

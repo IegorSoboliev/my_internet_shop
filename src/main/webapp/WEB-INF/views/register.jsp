@@ -29,12 +29,9 @@
         <input type="password" placeholder="Please, repeat Password" name="psw-repeat" required>
         <hr>
 
-        <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
         <button type="submit" class="registerbtn">Register</button>
     </div>
-
-    <div class="container signin">
-        <p>Already have an account? <a href="#">Sign in</a>.</p>
+    <p><a href="${pageContext.request.contextPath}/login">Sign in</a></p>
     </div>
 </form>
 <p><a href="${pageContext.request.contextPath}/index">Main Page</a></p>
