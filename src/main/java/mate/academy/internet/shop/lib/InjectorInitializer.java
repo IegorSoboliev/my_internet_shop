@@ -29,8 +29,13 @@ public class InjectorInitializer implements ServletContextListener {
         }
         try {
             Optional<User> defaultAdmin = userDao.findUserByEmail("admin@yahoo.com");
+            Optional<User> defaultUser = userDao.findUserByEmail("user@yahoo.com");
+
             if (defaultAdmin.isEmpty()) {
                 injectDefaultAdmin();
+            }
+            if (defaultUser.isEmpty()) {
+                injectDefaultUser();
             }
         } catch (EmailAlreadyRegisteredException | DataProcessingException e) {
             LOGGER.error("Cannot add default admin");
@@ -50,5 +55,15 @@ public class InjectorInitializer implements ServletContextListener {
         admin.setPassword("1");
         userService.create(admin);
         userDao.setAdminRole(admin);
+    }
+
+    private void injectDefaultUser() throws EmailAlreadyRegisteredException,
+            DataProcessingException {
+        User user = new User();
+        user.setName("Default");
+        user.setSurname("User");
+        user.setEmail("user@yahoo.com");
+        user.setPassword("2");
+        userService.create(user);
     }
 }

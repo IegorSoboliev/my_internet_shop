@@ -29,8 +29,8 @@ public class Factory {
     static {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/storage?"
-                    + "user=root&password=SQLsuccess8");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/storage?user="
+                    + "YOUR_USERNAME&password=YOUR_PASSWORD&serverTimezone=UTC"); //enter your username&password here
         } catch (ClassNotFoundException | SQLException e) {
             logger.error("Cannot establish a connection to DB", e);
         }
