@@ -32,17 +32,14 @@ public class LoginController extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("psw");
         try {
-            User user = null;
-            try {
-                user = userService.login(email, password);
-            } catch (DataProcessingException e) {
-                LOGGER.error(e);
-                req.getRequestDispatcher("/WEB-INF/views/dataProcessingProblem.jsp")
-                        .forward(req, resp);
-            }
+            User user = userService.login(email, password);
             HttpSession session = req.getSession(true);
             session.setAttribute("userId", user.getId());
             resp.sendRedirect(req.getContextPath() + "/index");
+        } catch (DataProcessingException e) {
+            LOGGER.error(e);
+            req.getRequestDispatcher("/WEB-INF/views/dataProcessingProblem.jsp")
+                    .forward(req, resp);
         } catch (AuthenticationException e) {
             req.setAttribute("errorAuthentication", "SORRY! Incorrect email or password");
             req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);

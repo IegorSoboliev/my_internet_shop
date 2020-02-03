@@ -26,6 +26,4 @@ public interface BucketService {
     void clear(Bucket bucket) throws DataProcessingException;
 
     List<Bucket> getAll() throws SQLException, DataProcessingException;
-
-    List<Item> getAllItems(Bucket bucket) throws DataProcessingException;
 }

@@ -53,18 +53,18 @@ public class OrderDaoJdbcImpl extends AbstractDao<Order> implements OrderDao {
 
     @Override
     public Optional<Order> get(Long id) throws DataProcessingException {
-        Order toFind = new Order();
+        Order order = new Order();
         String getOrder = String.format("SELECT * FROM %s WHERE order_id = ?;", ORDERS);
         try (PreparedStatement statement
                      = connection.prepareStatement(getOrder)) {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                toFind.setId(resultSet.getLong("order_id"));
-                toFind.setId(resultSet.getLong("user_id"));
-                toFind.setItems(copyOrderItems(toFind));
+                order.setId(resultSet.getLong("order_id"));
+                order.setId(resultSet.getLong("user_id"));
+                order.setItems(copyOrderItems(order));
             }
-            return Optional.of(toFind);
+            return Optional.of(order);
         } catch (SQLException e) {
             throw new DataProcessingException("Cannot show user from database " + ORDERS, e);
         }
@@ -78,11 +78,11 @@ public class OrderDaoJdbcImpl extends AbstractDao<Order> implements OrderDao {
             statement.setLong(1, userId);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Order found = new Order();
-                found.setId(resultSet.getLong("order_id"));
-                found.setUserId(userId);
-                found.setItems(copyOrderItems(found));
-                userOrders.add(found);
+                Order orderFound = new Order();
+                orderFound.setId(resultSet.getLong("order_id"));
+                orderFound.setUserId(userId);
+                orderFound.setItems(copyOrderItems(orderFound));
+                userOrders.add(orderFound);
             }
             return userOrders;
         } catch (SQLException e) {
@@ -98,11 +98,11 @@ public class OrderDaoJdbcImpl extends AbstractDao<Order> implements OrderDao {
         try (PreparedStatement statement = connection.prepareStatement(getUserOrders);) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Order found = new Order();
-                found.setId(resultSet.getLong("order_id"));
-                found.setUserId(resultSet.getLong("user_id"));
-                found.setItems(copyOrderItems(found));
-                allOrders.add(found);
+                Order orderFound = new Order();
+                orderFound.setId(resultSet.getLong("order_id"));
+                orderFound.setUserId(resultSet.getLong("user_id"));
+                orderFound.setItems(copyOrderItems(orderFound));
+                allOrders.add(orderFound);
             }
             return allOrders;
         } catch (SQLException e) {
@@ -171,11 +171,11 @@ public class OrderDaoJdbcImpl extends AbstractDao<Order> implements OrderDao {
                 Long itemId = resultSet.getLong("item_id");
                 String name = resultSet.getString("item_name");
                 Integer price = resultSet.getInt("price");
-                Item found = new Item();
-                found.setId(itemId);
-                found.setName(name);
-                found.setPrice(price);
-                orderItems.add(found);
+                Item itemFound = new Item();
+                itemFound.setId(itemId);
+                itemFound.setName(name);
+                itemFound.setPrice(price);
+                orderItems.add(itemFound);
             }
             return orderItems;
         } catch (SQLException e) {

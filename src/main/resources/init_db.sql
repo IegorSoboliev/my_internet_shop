@@ -38,7 +38,7 @@ CREATE TABLE `storage`.`users` (
                                    `name` VARCHAR(45) NOT NULL,
                                    `surname` VARCHAR(45) NOT NULL,
                                    `email` VARCHAR(45) NOT NULL,
-                                   `password` VARCHAR(45) NOT NULL,
+                                   `password` VARCHAR(600) NOT NULL,
                                    PRIMARY KEY (`user_id`));
 
 ALTER TABLE `storage`.`buckets_items`
@@ -95,8 +95,5 @@ INSERT INTO `storage`.`roles` (`role_id`, `role_name`) VALUES ('2', 'ADMIN');
 ALTER TABLE `storage`.`users`
     ADD COLUMN `salt` VARBINARY(600) NULL AFTER `password`;
 
-ALTER TABLE `storage`.`users`
-    CHANGE COLUMN `password` `password` VARBINARY(600) NOT NULL ;
-
-
-UPDATE users_roles SET role_id = 2 WHERE user_id = 1;
+INSERT INTO `storage`.`items` (`item_name`, `price`) VALUES ('\'Christmas carol\'', '125');
+INSERT INTO `storage`.`items` (`item_name`, `price`) VALUES ('smile', '50');

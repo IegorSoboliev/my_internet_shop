@@ -1,7 +1,6 @@
 package mate.academy.internet.shop.service.impl;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import mate.academy.internet.shop.dao.OrderDao;
 import mate.academy.internet.shop.exceptions.DataProcessingException;
@@ -29,7 +28,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order get(Long id) throws DataProcessingException {
         return orderDao.get(id)
-                .orElseThrow(() -> new NoSuchElementException("Found no order with id " + id));
+                .orElseThrow(() -> new DataProcessingException("Found no order with id " + id));
     }
 
     @Override

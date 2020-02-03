@@ -12,8 +12,6 @@
 <body>
 Hello, ${greeting}! There are excellent goods in this shop!
 
-<p><a href="${pageContext.request.contextPath}/servlet/addItem">Add item to storage</a></p>
-
 <table border="1">
     <tr>
         <th>Id</th>
@@ -39,6 +37,9 @@ Hello, ${greeting}! There are excellent goods in this shop!
         </tr>
     </c:forEach>
 </table>
+<p><a href="${pageContext.request.contextPath}/servlet/addItem">Add new item to storage(for admins only)</a></p>
+
+
 <p><a href="${pageContext.request.contextPath}/registration">Registration</a></p>
 <p><a href="${pageContext.request.contextPath}/login">Sign in</a></p>
 <p><a href="${pageContext.request.contextPath}/servlet/bucket">Your bucket</a></p>

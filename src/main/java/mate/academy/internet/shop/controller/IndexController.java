@@ -7,17 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import mate.academy.internet.shop.lib.Injector;
-
 public class IndexController extends HttpServlet {
-
-    static {
-        try {
-            Injector.injectDependency();
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException();
-        }
-    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)

@@ -2,7 +2,6 @@ package mate.academy.internet.shop.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import mate.academy.internet.shop.dao.BucketDao;
@@ -31,7 +30,7 @@ public class BucketServiceImpl implements BucketService {
     @Override
     public Bucket get(Long id) throws DataProcessingException {
         return bucketDao.get(id)
-                .orElseThrow(() -> new NoSuchElementException("Found no bucket with id " + id));
+                .orElseThrow(() -> new DataProcessingException("Found no bucket with id " + id));
     }
 
     @Override
@@ -61,15 +60,9 @@ public class BucketServiceImpl implements BucketService {
     }
 
     @Override
-    public List<Item> getAllItems(Bucket bucket) throws DataProcessingException {
-        return bucketDao.get(bucket.getId()).get().getItems();
-    }
-
-    @Override
     public void clear(Bucket bucket) throws DataProcessingException {
         bucketDao.removeBucketItemsFromDB(bucket);
-        List<Item> empty = new ArrayList<>();
-        bucket.setItems(empty);
+        bucket.setItems(new ArrayList<>());
     }
 
     @Override

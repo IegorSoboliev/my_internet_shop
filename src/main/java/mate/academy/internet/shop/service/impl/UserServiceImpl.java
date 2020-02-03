@@ -4,12 +4,12 @@ import static mate.academy.internet.shop.util.HashUtil.getSalt;
 import static mate.academy.internet.shop.util.HashUtil.hashPassword;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import mate.academy.internet.shop.dao.UserDao;
 import mate.academy.internet.shop.exceptions.AuthenticationException;
 import mate.academy.internet.shop.exceptions.DataProcessingException;
+import mate.academy.internet.shop.exceptions.EmailAlreadyRegisteredException;
 import mate.academy.internet.shop.lib.Inject;
 import mate.academy.internet.shop.lib.Service;
 import mate.academy.internet.shop.model.User;
@@ -21,7 +21,10 @@ public class UserServiceImpl implements UserService {
     private static UserDao userDao;
 
     @Override
-    public User create(User user) throws DataProcessingException {
+    public User create(User user) throws DataProcessingException, EmailAlreadyRegisteredException {
+        if (userDao.findUserByEmail(user.getEmail()).isPresent()) {
+            throw new EmailAlreadyRegisteredException("This email already registered");
+        }
         byte[] salt = getSalt();
         String enteredPassword = user.getPassword();
         String hashedPassword = hashPassword(enteredPassword, salt);
@@ -38,7 +41,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User get(Long id) throws DataProcessingException {
         return userDao.get(id)
-                .orElseThrow(() -> new NoSuchElementException("Found no user with id " + id));
+                .orElseThrow(() -> new DataProcessingException("Found no user with id " + id));
     }
 
     @Override
@@ -54,12 +57,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public User login(String email, String enteredPassword) throws AuthenticationException,
             DataProcessingException {
-        Optional<User> user = userDao.verifyEmail(email);
+        Optional<User> user = userDao.findUserByEmail(email);
         if (user.isEmpty()
                 || !hashPassword(enteredPassword, user.get().getSalt())
                 .equals(user.get().getPassword())) {
             throw new AuthenticationException("Incorrect login or password");
         }
         return user.get();
+    }
+
+    @Override
+    public void setAdminRole(User user) throws DataProcessingException {
+        userDao.setAdminRole(user);
     }
 }

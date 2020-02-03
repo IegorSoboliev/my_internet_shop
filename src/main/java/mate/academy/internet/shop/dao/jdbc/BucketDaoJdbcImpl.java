@@ -54,15 +54,13 @@ public class BucketDaoJdbcImpl extends AbstractDao implements BucketDao {
     @Override
     public Optional<Bucket> get(Long id) throws DataProcessingException {
         String getBucket = String.format("SELECT * FROM %s WHERE bucket_id = ?;", BUCKETS);
-        Optional<Bucket> toFind = getBucketFromDB(getBucket, id);
-        return toFind;
+        return getBucketFromDB(getBucket, id);
     }
 
     @Override
     public Optional<Bucket> getByUserId(Long userId) throws DataProcessingException {
         String getBucketByUserId = String.format("SELECT * FROM %s WHERE user_id = ?;", BUCKETS);
-        Optional<Bucket> toFind = getBucketFromDB(getBucketByUserId, userId);
-        return toFind;
+        return getBucketFromDB(getBucketByUserId, userId);
     }
 
     @Override
@@ -72,11 +70,11 @@ public class BucketDaoJdbcImpl extends AbstractDao implements BucketDao {
         try (PreparedStatement statement = connection.prepareStatement(getallBuckets);) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Bucket found = new Bucket();
-                found.setId(resultSet.getLong("bucket_id"));
-                found.setUserId(resultSet.getLong("user_id"));
-                found.setItems(copyBucketItems(found));
-                allBuckets.add(found);
+                Bucket bucketFound = new Bucket();
+                bucketFound.setId(resultSet.getLong("bucket_id"));
+                bucketFound.setUserId(resultSet.getLong("user_id"));
+                bucketFound.setItems(copyBucketItems(bucketFound));
+                allBuckets.add(bucketFound);
             }
             return allBuckets;
         } catch (SQLException e) {
@@ -139,11 +137,11 @@ public class BucketDaoJdbcImpl extends AbstractDao implements BucketDao {
                 Long itemId = resultSet.getLong("item_id");
                 String name = resultSet.getString("item_name");
                 Integer price = resultSet.getInt("price");
-                Item found = new Item();
-                found.setId(itemId);
-                found.setName(name);
-                found.setPrice(price);
-                bucketItems.add(found);
+                Item itemFound = new Item();
+                itemFound.setId(itemId);
+                itemFound.setName(name);
+                itemFound.setPrice(price);
+                bucketItems.add(itemFound);
             }
             return bucketItems;
         } catch (SQLException e) {
@@ -156,12 +154,12 @@ public class BucketDaoJdbcImpl extends AbstractDao implements BucketDao {
                      = connection.prepareStatement(query)) {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                Bucket found = new Bucket();
-                found.setId(resultSet.getLong("bucket_id"));
-                found.setUserId(resultSet.getLong("user_id"));
-                found.setItems(copyBucketItems(found));
-                return Optional.of(found);
+            if (resultSet.next()) {
+                Bucket bucketFound = new Bucket();
+                bucketFound.setId(resultSet.getLong("bucket_id"));
+                bucketFound.setUserId(resultSet.getLong("user_id"));
+                bucketFound.setItems(copyBucketItems(bucketFound));
+                return Optional.of(bucketFound);
             }
         } catch (SQLException e) {
             throw new DataProcessingException("Cannot show bucket and its items from databases "

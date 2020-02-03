@@ -1,4 +1,4 @@
-package mate.academy.internet.shop.web;
+package mate.academy.internet.shop.filters;
 
 import static mate.academy.internet.shop.model.Role.RoleName.ADMIN;
 import static mate.academy.internet.shop.model.Role.RoleName.USER;
@@ -72,10 +72,8 @@ public class AuthorizationFilter implements Filter {
         if (verifyRole(user, rolesAdmin) || verifyRole(user, rolesUser)) {
             processAuthorized(filterChain, request, response);
             return;
-        } else {
-            processDenied(request, response);
-            return;
         }
+        processDenied(request, response);
     }
 
     private boolean verifyRole(User user, Role.RoleName roleName) {

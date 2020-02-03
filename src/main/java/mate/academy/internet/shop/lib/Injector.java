@@ -8,11 +8,10 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
-import mate.academy.internet.shop.dao.UserDao;
 import org.apache.log4j.Logger;
 
 public class Injector {
-    public static final Logger LOGGER = Logger.getLogger(Injector.class);
+    private static final Logger LOGGER = Logger.getLogger(Injector.class);
     private static final String PROJECT_MAIN_PACKAGE = "mate.academy.internet.shop";
     private static List<Class> classes = new ArrayList<>();
 
@@ -23,10 +22,6 @@ public class Injector {
             LOGGER.error("Class not found", e);
             throw new RuntimeException();
         }
-    }
-
-    static {
-        classes.add(UserDao.class);
     }
 
     public static void injectDependency() throws IllegalAccessException {
