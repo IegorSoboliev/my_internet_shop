@@ -1,4 +1,4 @@
-CREATE SCHEMA 'storage' DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA `storage` DEFAULT CHARACTER SET utf8 ;
 
 CREATE TABLE `storage`.`orders_items` (
                                           `order_id` INT NULL,

@@ -9,7 +9,7 @@
     <title>Bucket</title>
 </head>
 <body>
-This is your bucket, ${greeting}. Nice choice:)))!
+This is your bucket
 
 <table border="1">
     <tr>

@@ -9,7 +9,7 @@
     <title>Orders</title>
 </head>
 <body>
-These are your orders, ${greeting}. You are wise!
+These are your orders
 
 <table border="1">
     <tr>
