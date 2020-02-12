@@ -57,7 +57,7 @@ Also there are two items in the store: a book and a flower:).
 
 # <a name="author"></a>Author
 
-[Iegor Soboliev]https://github.com/IegorSoboliev
+Iegor Soboliev https://github.com/IegorSoboliev
 
 
 
