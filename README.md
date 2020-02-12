@@ -39,11 +39,10 @@ a list of all registered users.
 3. Configure Tomcat:
 add artifact my_internet_shop_war_exploded;
 add as URL http://localhost:8080/my_internet_shop_war_exploded/index 
-choose sdk 11.0.3.
 
 4. Start MySQLWorkbench.
 
-5. At my_interntet_shop.src.main.java.mate.academy.internet.shop.factories.Factory class use your username 
+5. At my_internet_shop.src.main.java.mate.academy.internet.shop.factories.Factory class use your username 
 and password for your MySQLWorkbench to create a Connection.
 
 6. Run my_interntet_shop.src.main.resources.init_db.sql to create all the tables required by this app.
